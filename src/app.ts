@@ -7,6 +7,7 @@ import {
 } from '@fastify/type-provider-zod';
 import Fastify from 'fastify';
 import { inventoryRoutes } from './controller/inventory/inventory.route';
+import { authRoutes } from './lib/auth/betterAuth.route';
 
 export function buildApp() {
   const app = Fastify({
@@ -28,6 +29,7 @@ export function buildApp() {
     status: 'ok',
     timestamp: new Date().toISOString(),
   }));
+  app.register(authRoutes);
   app.register(inventoryRoutes, { prefix: '/api/inventories' });
 
   return app;
