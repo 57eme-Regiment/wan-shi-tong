@@ -1,0 +1,44 @@
+{
+  "name": "wan-shi-tong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn -r tsconfig-paths/register src/main.ts",
+    "dev:all": "pnpm --filter @57eme-regiment/auth-contracts dev & pnpm dev",
+    "build": "pnpm -r --filter @57eme-regiment/auth-contracts --filter @57eme-regiment/auth-server --filter @57eme-regiment/auth-browser build && tsc --project tsconfig.json",
+    "start": "node dist/src/main.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "57regiment",
+  "license": "ISC",
+  "packageManager": "pnpm@11.1.2",
+  "dependencies": {
+    "@57eme-regiment/auth-contracts": "workspace:*",
+    "@fastify/cors": "^11.2.0",
+    "@fastify/type-provider-zod": "^1.0.0",
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "fastify": "^5.0.0",
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.8.0",
+    "zod": "^4.4.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "prisma"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "dotenv": "^17.4.2",
+    "prisma": "^7.8.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.6.0"
+  }
+}
