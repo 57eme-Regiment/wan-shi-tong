@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "lib": ["ES2022"],
+    "outDir": "./dist",
+    "rootDir": ".",
+    "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@57eme-regiment/auth-contracts": [
+        "packages/auth-contracts/src/index.ts"
+      ],
+      "@57eme-regiment/auth-contracts/*": [
+        "packages/auth-contracts/src/*"
+      ]
+    }
+  },
+  "include": ["src/**/*", "packages/auth-contracts/src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
