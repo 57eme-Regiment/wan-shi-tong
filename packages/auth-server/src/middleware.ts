@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import type { AuthorizedUser, Permission } from "@57eme-regiment/auth-contracts";
-import { authorizeRequest } from "./authorize.js";
+import { authorizeRequest } from "./authorize";
 
 declare module "fastify" {
   interface FastifyRequest {

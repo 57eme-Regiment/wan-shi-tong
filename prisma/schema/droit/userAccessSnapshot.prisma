@@ -1,0 +1,10 @@
+model UserAccessSnapshot {
+  userId       String   @id
+  appRoles     Json
+  discordRoles Json
+  permissions  Json
+  computedAt   DateTime @default(now()) @db.Timestamptz(3)
+
+  @@map("userAccessSnapshot")
+  @@schema("droit")
+}

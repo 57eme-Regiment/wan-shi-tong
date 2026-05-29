@@ -1,5 +1,5 @@
 import z from 'zod';
-import { PermissionSchema } from './permissions.js';
+import { PermissionSchema } from './permissions';
 
 export const DiscordSnowflakeSchema = z
   .string()

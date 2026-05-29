@@ -1,0 +1,11 @@
+model DiscordRoleMapping {
+  id            String @id @default(uuid())
+  guildId       String
+  discordRoleId String
+  roleId        String
+  role          Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([guildId, discordRoleId, roleId])
+  @@map("discordRoleMapping")
+  @@schema("droit")
+}

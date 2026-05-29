@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import type { MyAccess, Permission } from "@57eme-regiment/auth-contracts";
-import { createAccessClient } from "./access-client.js";
+import { createAccessClient } from "./access-client";
 
 export function createAuthHooks(baseUrl: string) {
   const client = createAccessClient(baseUrl);

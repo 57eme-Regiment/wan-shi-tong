@@ -8,5 +8,16 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Account'
+export type * from './models/Session'
+export type * from './models/User'
+export type * from './models/Verification'
+export type * from './models/DiscordRoleMapping'
+export type * from './models/DiscordUserRole'
 export type * from './models/Inventory'
+export type * from './models/Permission'
+export type * from './models/Role'
+export type * from './models/RolePermission'
+export type * from './models/UserAccessSnapshot'
+export type * from './models/UserPermissionOverride'
 export type * from './commonInputTypes'

@@ -18,7 +18,62 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
+ * Model Account
+ * 
+ */
+export type Account = Prisma.AccountModel
+/**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model Verification
+ * 
+ */
+export type Verification = Prisma.VerificationModel
+/**
+ * Model DiscordRoleMapping
+ * 
+ */
+export type DiscordRoleMapping = Prisma.DiscordRoleMappingModel
+/**
+ * Model DiscordUserRole
+ * 
+ */
+export type DiscordUserRole = Prisma.DiscordUserRoleModel
+/**
  * Model Inventory
  * 
  */
 export type Inventory = Prisma.InventoryModel
+/**
+ * Model Permission
+ * 
+ */
+export type Permission = Prisma.PermissionModel
+/**
+ * Model Role
+ * 
+ */
+export type Role = Prisma.RoleModel
+/**
+ * Model RolePermission
+ * 
+ */
+export type RolePermission = Prisma.RolePermissionModel
+/**
+ * Model UserAccessSnapshot
+ * 
+ */
+export type UserAccessSnapshot = Prisma.UserAccessSnapshotModel
+/**
+ * Model UserPermissionOverride
+ * 
+ */
+export type UserPermissionOverride = Prisma.UserPermissionOverrideModel

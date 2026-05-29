@@ -6,6 +6,7 @@ export const PERMISSIONS = {
   STOCK_INVENTORY_CREATE: 'stock:inventory:create',
   STOCK_INVENTORY_UPDATE: 'stock:inventory:update',
   STOCK_INVENTORY_DELETE: 'stock:inventory:delete',
+  STOCK_INVENTORY_CODE_READ: 'stock:inventory:code:read',
 
   // Stock — Item
   STOCK_ITEM_READ: 'stock:item:read',
@@ -37,6 +38,18 @@ export const PERMISSIONS = {
   KRANG_LOCATION_CREATE: 'krang:location:create',
   KRANG_LOCATION_UPDATE: 'krang:location:update',
   KRANG_LOCATION_DELETE: 'krang:location:delete',
+
+  // Krang — Location
+  KRANG_TOWN_READ: 'krang:town:read',
+  KRANG_TOWN_CREATE: 'krang:town:create',
+  KRANG_TOWN_UPDATE: 'krang:town:update',
+  KRANG_TOWN_DELETE: 'krang:town:delete',
+
+  // Krang — Location
+  KRANG_REGION_READ: 'krang:region:read',
+  KRANG_REGION_CREATE: 'krang:region:create',
+  KRANG_REGION_UPDATE: 'krang:region:update',
+  KRANG_REGION_DELETE: 'krang:region:delete',
 
   // Admin — Utilisateurs
   ADMIN_USERS_READ: 'admin:users:read',

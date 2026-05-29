@@ -1,0 +1,20 @@
+enum OverrideEffect {
+  allow
+  deny
+
+  @@schema("droit")
+}
+
+model UserPermissionOverride {
+  id           String         @id @default(uuid())
+  userId       String
+  permissionId String
+  effect       OverrideEffect
+  reason       String?
+  createdAt    DateTime       @default(now())
+  permission   Permission     @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, permissionId])
+  @@map("userPermissionOverride")
+  @@schema("droit")
+}

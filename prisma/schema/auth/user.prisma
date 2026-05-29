@@ -1,0 +1,19 @@
+model User {
+  id              String    @id  @default(uuid())
+  email           String    @unique
+  emailVerified   Boolean
+  name            String
+  image           String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  disabledAt      DateTime? @db.Timestamptz(3)
+  disabledReason  String?
+
+  sessions        Session[]
+  accounts        Account[]
+
+
+	@@map("user")
+  @@schema("auth")
+}

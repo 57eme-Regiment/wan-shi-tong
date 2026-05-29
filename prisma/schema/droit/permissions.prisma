@@ -1,0 +1,13 @@
+model Permission {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+
+  roles     RolePermission[]
+  overrides UserPermissionOverride[]
+
+  @@index([key])
+  @@map("permission")
+  @@schema("droit")
+}

@@ -29,8 +29,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Inventories
- * const inventories = await prisma.inventory.findMany()
+ * // Fetch zero or more Accounts
+ * const accounts = await prisma.account.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -40,7 +40,62 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
+ * Model Account
+ * 
+ */
+export type Account = Prisma.AccountModel
+/**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model Verification
+ * 
+ */
+export type Verification = Prisma.VerificationModel
+/**
+ * Model DiscordRoleMapping
+ * 
+ */
+export type DiscordRoleMapping = Prisma.DiscordRoleMappingModel
+/**
+ * Model DiscordUserRole
+ * 
+ */
+export type DiscordUserRole = Prisma.DiscordUserRoleModel
+/**
  * Model Inventory
  * 
  */
 export type Inventory = Prisma.InventoryModel
+/**
+ * Model Permission
+ * 
+ */
+export type Permission = Prisma.PermissionModel
+/**
+ * Model Role
+ * 
+ */
+export type Role = Prisma.RoleModel
+/**
+ * Model RolePermission
+ * 
+ */
+export type RolePermission = Prisma.RolePermissionModel
+/**
+ * Model UserAccessSnapshot
+ * 
+ */
+export type UserAccessSnapshot = Prisma.UserAccessSnapshotModel
+/**
+ * Model UserPermissionOverride
+ * 
+ */
+export type UserPermissionOverride = Prisma.UserPermissionOverrideModel

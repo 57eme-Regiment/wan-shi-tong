@@ -9,12 +9,9 @@
 * 🟢 You can import this file directly.
 */
 
-export const TransactionType = {
-  DEPOSIT: 'DEPOSIT',
-  WITHDRAW: 'WITHDRAW',
-  TRANSFER: 'TRANSFER',
-  PRODUCTION: 'PRODUCTION',
-  LOSS: 'LOSS'
+export const OverrideEffect = {
+  allow: 'allow',
+  deny: 'deny'
 } as const
 
-export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
+export type OverrideEffect = (typeof OverrideEffect)[keyof typeof OverrideEffect]

@@ -1,0 +1,10 @@
+model DiscordUserRole {
+  userId        String
+  guildId       String
+  discordRoleId String
+  syncedAt      DateTime @default(now()) @db.Timestamptz(3)
+
+  @@id([userId, guildId, discordRoleId])
+  @@map("discordUserRole")
+  @@schema("droit")
+}

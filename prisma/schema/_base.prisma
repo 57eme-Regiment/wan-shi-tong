@@ -5,12 +5,5 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-}
-
-enum TransactionType {
-  DEPOSIT
-  WITHDRAW
-  TRANSFER
-  PRODUCTION
-  LOSS
+  schemas = ["auth", "droit"]
 }
