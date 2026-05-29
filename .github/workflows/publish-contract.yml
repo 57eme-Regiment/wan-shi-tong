@@ -1,0 +1,87 @@
+name: Publish Auth Packages
+
+on:
+  push:
+    paths:
+      - 'packages/**'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@57eme-regiment'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: |
+          pnpm --filter @57eme-regiment/auth-contracts build
+          pnpm --filter @57eme-regiment/auth-server build
+          pnpm --filter @57eme-regiment/auth-browser build
+
+      - name: Auto-bump + publish stable (main)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          BUMPED=false
+
+          for PKG in auth-contracts auth-server auth-browser; do
+            PKG_NAME="@57eme-regiment/$PKG"
+            PKG_DIR="packages/$PKG"
+
+            LOCAL=$(node -p "require('./$PKG_DIR/package.json').version")
+            PUBLISHED=$(npm view "$PKG_NAME" version --registry https://npm.pkg.github.com 2>/dev/null || echo "none")
+
+            echo "[$PKG] Local: $LOCAL | Published: $PUBLISHED"
+
+            if [ "$LOCAL" = "$PUBLISHED" ]; then
+              echo "[$PKG] Versions match — bumping minor"
+              npm version minor --no-git-tag-version --prefix "$PKG_DIR"
+              git add "$PKG_DIR/package.json"
+              BUMPED=true
+            else
+              echo "[$PKG] Local version differs — skipping auto-bump"
+            fi
+
+            (cd "$PKG_DIR" && pnpm publish --no-git-checks --access public --tag latest)
+          done
+
+          if [ "$BUMPED" = true ]; then
+            git commit -m "chore: bump packages minor version [skip ci]"
+            git push
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compute beta versions and publish (non-main)
+        if: github.ref != 'refs/heads/main'
+        run: |
+          for PKG in auth-contracts auth-server auth-browser; do
+            PKG_DIR="packages/$PKG"
+
+            CURRENT=$(node -p "require('./$PKG_DIR/package.json').version")
+            BETA_VERSION="${CURRENT}-beta.${{ github.run_number }}"
+
+            echo "[$PKG] Publishing beta version: $BETA_VERSION"
+            npm version "$BETA_VERSION" --no-git-tag-version --prefix "$PKG_DIR"
+
+            (cd "$PKG_DIR" && pnpm publish --no-git-checks --access public --tag beta)
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
