@@ -26,7 +26,7 @@ export const MyAccessSchema = z.object({
 export type MyAccess = z.infer<typeof MyAccessSchema>;
 
 export const SuccessResponseSchema = z.object({
-  allowed: z.boolean().default(true),
+  allowed: z.literal(true),
   user: AuthorizedUserSchema,
 });
 export type SuccessResponse = z.infer<typeof SuccessResponseSchema>;
@@ -41,13 +41,15 @@ export const FailReasonSchema = z.enum(FailReason);
 export type FailReason = (typeof FailReason)[keyof typeof FailReason];
 
 export const FailResponseSchema = z.object({
-  allowed: z.boolean().default(false),
+  allowed: z.literal(false),
   reason: FailReasonSchema.default('UNAUTHENTICATED'),
   permission: PermissionSchema.optional(),
 });
 export type FailResponse = z.infer<typeof FailResponseSchema>;
 
-export const AuthorizeResponseSchema =
-  SuccessResponseSchema.or(FailResponseSchema);
+export const AuthorizeResponseSchema = z.discriminatedUnion('allowed', [
+  SuccessResponseSchema,
+  FailResponseSchema,
+]);
 
 export type AuthorizeResponse = z.infer<typeof AuthorizeResponseSchema>;
