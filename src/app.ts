@@ -31,6 +31,7 @@ export function buildApp() {
 
   app.register(cors, {
     origin: env.CORS_ORIGINS,
+    credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   });
 
