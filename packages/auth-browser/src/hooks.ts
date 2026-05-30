@@ -1,9 +1,15 @@
-import { useState, useEffect } from "react";
-import type { AccessMeResponse, Permission } from "@57eme-regiment/auth-contracts";
-import { getConfig } from "./config";
+import type {
+  AccessMeResponse,
+  Permission,
+} from '@57eme-regiment/auth-contracts';
+import { useEffect, useState } from 'react';
+import { getConfig } from './config';
 
 /** Récupère les informations d'accès de l'utilisateur connecté (rôles + permissions). */
-export function useAccess(): { access: AccessMeResponse | null; loading: boolean } {
+export function useAccess(): {
+  access: AccessMeResponse | null;
+  loading: boolean;
+} {
   const [access, setAccess] = useState<AccessMeResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +24,8 @@ export function useAccess(): { access: AccessMeResponse | null; loading: boolean
 }
 
 /** Retourne true si l'utilisateur connecté possède la permission donnée. */
-export function useHasPermission(permission: Permission): boolean {
+export function useHasPermission(permission?: Permission): boolean {
+  if (!permission) return true;
   const { access } = useAccess();
   return getConfig().accessClient.hasPermission(access, permission);
 }
