@@ -1,28 +1,24 @@
 import { useState, useEffect } from "react";
 import type { AccessMeResponse, Permission } from "@57eme-regiment/auth-contracts";
-import { createAccessClient } from "./access-client";
+import { getConfig } from "./config";
 
-export function createAuthHooks(baseUrl: string) {
-  const client = createAccessClient(baseUrl);
+/** Récupère les informations d'accès de l'utilisateur connecté (rôles + permissions). */
+export function useAccess(): { access: AccessMeResponse | null; loading: boolean } {
+  const [access, setAccess] = useState<AccessMeResponse | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  function useAccess(): { access: AccessMeResponse | null; loading: boolean } {
-    const [access, setAccess] = useState<AccessMeResponse | null>(null);
-    const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    getConfig()
+      .accessClient.getMyAccess()
+      .then(setAccess)
+      .finally(() => setLoading(false));
+  }, []);
 
-    useEffect(() => {
-      client
-        .getMyAccess()
-        .then(setAccess)
-        .finally(() => setLoading(false));
-    }, []);
+  return { access, loading };
+}
 
-    return { access, loading };
-  }
-
-  function useHasPermission(permission: Permission): boolean {
-    const { access } = useAccess();
-    return client.hasPermission(access, permission);
-  }
-
-  return { useAccess, useHasPermission };
+/** Retourne true si l'utilisateur connecté possède la permission donnée. */
+export function useHasPermission(permission: Permission): boolean {
+  const { access } = useAccess();
+  return getConfig().accessClient.hasPermission(access, permission);
 }
