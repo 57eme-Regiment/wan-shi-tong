@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import ms from 'ms';
 import { z } from 'zod';
 
 const envSchema = z.object({
@@ -11,9 +12,7 @@ const envSchema = z.object({
   CORS_ORIGINS: z
     .string()
     .default('*')
-    .transform((val) =>
-      val === '*' ? '*' : val.split(',').map((s) => s.trim()),
-    ),
+    .transform(val => (val === '*' ? '*' : val.split(',').map(s => s.trim()))),
 
   // Better Auth
   BETTER_AUTH_SECRET: z.string().min(32),
@@ -23,6 +22,13 @@ const envSchema = z.object({
   DISCORD_CLIENT_ID: z.string().min(1),
   DISCORD_CLIENT_SECRET: z.string().min(1),
   DISCORD_GUILD_ID: z.string().min(1),
+
+  SESSION_REFRESH_TIME: z
+    .string()
+    .refine(
+      (val): val is ms.StringValue => ms(val as ms.StringValue) !== undefined,
+      { message: 'SESSION_REFRESH_TIME must be a valid ms duration (e.g. "5s", "10m", "1h")' },
+    ),
 });
 
 export const env = envSchema.parse(process.env);

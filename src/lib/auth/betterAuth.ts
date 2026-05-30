@@ -33,7 +33,7 @@ export const auth = betterAuth({
   },
   session: {
     expiresIn: sec('6d'),
-    updateAge: sec('5s'),
+    updateAge: sec(env.SESSION_REFRESH_TIME),
   },
   socialProviders: {
     discord: {

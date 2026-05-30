@@ -1,25 +1,26 @@
-import type {
-  AuthorizeResponse,
-  Permission,
-} from '@57eme-regiment/auth-contracts';
+import type { AuthorizeBody, AuthorizeResponse } from '@57eme-regiment/auth-contracts';
+import { authorizeContract, AuthorizeResponseSchema } from '@57eme-regiment/auth-contracts';
 
 export async function authorizeRequest(params: {
   authServiceUrl: string;
   cookie?: string;
-  permission: Permission;
+  permission: AuthorizeBody['permission'];
 }): Promise<AuthorizeResponse> {
-  const res = await fetch(`${params.authServiceUrl}/authorize`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      cookie: params.cookie ?? '',
+  const res = await fetch(
+    `${params.authServiceUrl}${authorizeContract.check.path}`,
+    {
+      method: authorizeContract.check.method,
+      headers: {
+        'content-type': 'application/json',
+        cookie: params.cookie ?? '',
+      },
+      body: JSON.stringify({ permission: params.permission }),
     },
-    body: JSON.stringify({ permission: params.permission }),
-  });
+  );
 
   if (!res.ok) {
     return { allowed: false, reason: 'UNAUTHENTICATED' };
   }
 
-  return res.json() as Promise<AuthorizeResponse>;
+  return AuthorizeResponseSchema.parse(await res.json());
 }
