@@ -2,6 +2,7 @@ import { env } from '@/config/env';
 import { container } from '@/infrastructure/container';
 import { Database } from '@/infrastructure/database';
 import { sec } from '@/lib/ms/msHelper';
+import { DiscordRoleSyncService } from '@/service/discord/discordRoleSync.service';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 
@@ -40,6 +41,32 @@ export const auth = betterAuth({
       clientSecret: env.DISCORD_CLIENT_SECRET,
       disableDefaultScope: true,
       scope: ['identify', 'guilds.members.read'],
+    },
+  },
+  databaseHooks: {
+    session: {
+      create: {
+        after: async session => {
+          const account = await context.account.findFirst({
+            where: { userId: session.userId, providerId: 'discord' },
+            select: { accessToken: true },
+          });
+
+          if (!account?.accessToken) return;
+
+          const syncService = container.resolve(DiscordRoleSyncService);
+
+          syncService
+            .sync(session.userId, account.accessToken, env.DISCORD_GUILD_ID)
+            .catch(err =>
+              console.error(
+                '[Discord sync] failed for user',
+                session.userId,
+                err,
+              ),
+            );
+        },
+      },
     },
   },
 });
