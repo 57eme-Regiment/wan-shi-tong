@@ -8,7 +8,7 @@ export const DiscordSnowflakeSchema = z
 export type DiscordSnowflake = z.infer<typeof DiscordSnowflakeSchema>;
 
 export const AuthorizedUserSchema = z.object({
-  id: z.uuid(),
+  id: z.string().min(1),
   discordUserId: DiscordSnowflakeSchema,
   username: z.string(),
 });

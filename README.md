@@ -135,3 +135,17 @@ ALLOWED_HOST=wanshitong.57regiment.local
 ```
 
 Toute requête dont le header `Host` ne correspond pas reçoit un `404`. Laisser la variable vide (ou absente) pour tout accepter — utile en CI ou pour les tests automatisés.
+
+---
+
+## Tester avec Bruno
+
+Les routes Better Auth sont exposées sous le préfixe `/api/auth` (défaut Better Auth).
+
+**Login Discord** — ouvrir dans le navigateur :
+
+```
+http://wanshitong.57regiment.local:3001/api/auth/sign-in/social?provider=discord&callbackURL=http://wanshitong.57regiment.local:3001
+```
+
+Après autorisation Discord, récupérer le cookie `better-auth.session_token` dans les DevTools (`F12` → Application → Cookies) et le coller dans la variable `sessionCookie` de l'environnement Bruno `local`.

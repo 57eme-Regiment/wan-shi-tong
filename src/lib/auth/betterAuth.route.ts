@@ -17,7 +17,7 @@ export async function authRoutes(app: FastifyInstance) {
    * Proxy générique vers Better Auth : reconstruit une Web Request standard et délègue
    * la réponse (status, headers, body) directement à Better Auth.
    */
-  app.all('/auth/*', async (request, reply) => {
+  app.all('/api/auth/*', async (request, reply) => {
     const url = new URL(request.url, env.BETTER_AUTH_URL);
     const headers = new Headers(request.headers as Record<string, string>);
     const hasBody = request.method !== 'GET' && request.method !== 'HEAD';

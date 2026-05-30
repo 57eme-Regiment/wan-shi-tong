@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { DiscordSnowflakeSchema } from '../types';
 
 export const AccessUserSchema = z.object({
-  id: z.uuid(),
+  id: z.string().min(1),
   discordUserId: DiscordSnowflakeSchema,
   username: z.string(),
   avatarUrl: z.string().nullish(),
