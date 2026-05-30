@@ -1,0 +1,15 @@
+meta {
+  name: Delete Discord Mapping
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/admin/discord-mappings/{{mappingId}}
+  body: none
+  auth: none
+}
+
+headers {
+  cookie: {{sessionCookie}}
+}

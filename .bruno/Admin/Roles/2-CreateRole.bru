@@ -1,0 +1,23 @@
+meta {
+  name: Create Role
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/roles
+  body: json
+  auth: none
+}
+
+headers {
+  cookie: {{sessionCookie}}
+}
+
+body:json {
+  {
+    "key": "stock-user",
+    "name": "Stock User",
+    "description": "Lecture et transactions basiques sur les stocks"
+  }
+}

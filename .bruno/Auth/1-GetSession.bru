@@ -1,0 +1,15 @@
+meta {
+  name: Get Session
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/auth/get-session
+  body: none
+  auth: none
+}
+
+headers {
+  cookie: {{sessionCookie}}
+}

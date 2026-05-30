@@ -6,10 +6,10 @@ import {
   validatorCompiler,
 } from '@fastify/type-provider-zod';
 import Fastify from 'fastify';
-import { accessRoutes } from './access/access.routes';
 import { authorizeRoutes } from './authorize/authorize.routes';
-import { inventoryRoutes } from './controller/inventory/inventory.route';
 import { authRoutes } from './lib/auth/betterAuth.route';
+import { accessRoutes } from './services/access/access.routes';
+import { adminRoutes } from './servicesAdmin/admin.routes';
 
 export function buildApp() {
   const app = Fastify({
@@ -33,8 +33,8 @@ export function buildApp() {
   }));
   app.register(authRoutes);
   app.register(accessRoutes, { prefix: '/access' });
+  app.register(adminRoutes, { prefix: '/admin' });
   app.register(authorizeRoutes, { prefix: '/authorize' });
-  app.register(inventoryRoutes, { prefix: '/api/inventories' });
 
   return app;
 }

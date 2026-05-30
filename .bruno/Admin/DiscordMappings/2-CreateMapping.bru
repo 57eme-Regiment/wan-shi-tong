@@ -1,0 +1,23 @@
+meta {
+  name: Create Discord Mapping
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/discord-mappings
+  body: json
+  auth: none
+}
+
+headers {
+  cookie: {{sessionCookie}}
+}
+
+body:json {
+  {
+    "guildId": "123456789012345678",
+    "discordRoleId": "987654321098765432",
+    "roleKey": "stock-user"
+  }
+}

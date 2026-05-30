@@ -1,52 +1,55 @@
-import { AccessController } from '@/access/access.controller';
 import { AuthorizeController } from '@/authorize/authorize.controller';
-import { InventoryController } from '@/controller/inventory/inventory.controller';
-import { DiscordRoleSyncRepository } from '@/repository/discord/discord-role-sync.repository';
-import { IDiscordRoleSyncRepository } from '@/repository/discord/discord-role-sync.repository.interface';
-import { InventoryRepository } from '@/repository/inventory/inventory.repository';
-import { IInventoryRepository } from '@/repository/inventory/inventory.repository.interface';
-import { PermissionResolverRepository } from '@/repository/permission/permissionResolver.repository';
-import { IPermissionResolverRepository } from '@/repository/permission/permissionResolver.repository.interface';
-import { DiscordRoleSyncService } from '@/service/discord/discordRoleSync.service';
-import { IDiscordRoleSyncService } from '@/service/discord/discordRoleSync.service.interface';
-import { InventoryService } from '@/service/inventory/inventory.service';
-import { IInventoryService } from '@/service/inventory/inventory.service.interface';
-import { PermissionResolverService } from '@/service/permission/permissionResolver.service';
-import { IPermissionResolverService } from '@/service/permission/permissionResolver.service.interface';
+import { AccessController } from '@/services/access/access.controller';
+import { DiscordRoleSyncRepository } from '@/services/discord/discord-role-sync.repository';
+import { DiscordRoleSyncService } from '@/services/discord/discordRoleSync.service';
+import { PermissionResolverRepository } from '@/services/permission/permissionResolver.repository';
+import { PermissionResolverService } from '@/services/permission/permissionResolver.service';
+import { AdminGuard } from '@/servicesAdmin/adminGuard';
+import { AdminDiscordMappingController } from '@/servicesAdmin/discordMapping/adminDiscordMapping.controller';
+import { AdminDiscordMappingRepository } from '@/servicesAdmin/discordMapping/adminDiscordMapping.repository';
+import { AdminDiscordMappingService } from '@/servicesAdmin/discordMapping/adminDiscordMapping.service';
+import { AdminOverrideController } from '@/servicesAdmin/overrides/adminOverride.controller';
+import { AdminOverrideRepository } from '@/servicesAdmin/overrides/adminOverride.repository';
+import { AdminOverrideService } from '@/servicesAdmin/overrides/adminOverride.service';
+import { AdminPermissionController } from '@/servicesAdmin/permissions/adminPermission.controller';
+import { AdminPermissionService } from '@/servicesAdmin/permissions/adminPermission.service';
+import { AdminRoleController } from '@/servicesAdmin/roles/adminRole.controller';
+import { AdminRoleRepository } from '@/servicesAdmin/roles/adminRole.repository';
+import { AdminRoleService } from '@/servicesAdmin/roles/adminRole.service';
+import { AdminSessionController } from '@/servicesAdmin/sessions/adminSession.controller';
+import { AdminSessionService } from '@/servicesAdmin/sessions/adminSession.service';
+import { AdminUserController } from '@/servicesAdmin/users/adminUser.controller';
+import { AdminUserService } from '@/servicesAdmin/users/adminUser.service';
 import 'reflect-metadata';
 import { container } from 'tsyringe';
 import { Database } from './database';
 
 container.registerSingleton(Database);
 
-container.registerSingleton<IDiscordRoleSyncRepository>(
-  'IDiscordRoleSyncRepository',
-  DiscordRoleSyncRepository,
-);
-container.registerSingleton<IDiscordRoleSyncService>(
-  'IDiscordRoleSyncService',
-  DiscordRoleSyncService,
-);
+container.registerSingleton(DiscordRoleSyncRepository);
+container.registerSingleton(DiscordRoleSyncService);
 
-container.registerSingleton<IPermissionResolverRepository>(
-  'IPermissionResolverRepository',
-  PermissionResolverRepository,
-);
-container.registerSingleton<IPermissionResolverService>(
-  'IPermissionResolverService',
-  PermissionResolverService,
-);
+container.registerSingleton(PermissionResolverRepository);
+container.registerSingleton(PermissionResolverService);
 
-container.registerSingleton<IInventoryRepository>(
-  'IInventoryRepository',
-  InventoryRepository,
-);
-container.registerSingleton<IInventoryService>(
-  'IInventoryService',
-  InventoryService,
-);
 container.registerSingleton(AccessController);
 container.registerSingleton(AuthorizeController);
-container.registerSingleton(InventoryController);
+
+container.registerSingleton(AdminGuard);
+container.registerSingleton(AdminRoleRepository);
+container.registerSingleton(AdminRoleService);
+container.registerSingleton(AdminRoleController);
+container.registerSingleton(AdminPermissionService);
+container.registerSingleton(AdminPermissionController);
+container.registerSingleton(AdminDiscordMappingRepository);
+container.registerSingleton(AdminDiscordMappingService);
+container.registerSingleton(AdminDiscordMappingController);
+container.registerSingleton(AdminOverrideRepository);
+container.registerSingleton(AdminOverrideService);
+container.registerSingleton(AdminOverrideController);
+container.registerSingleton(AdminUserService);
+container.registerSingleton(AdminUserController);
+container.registerSingleton(AdminSessionService);
+container.registerSingleton(AdminSessionController);
 
 export { container };

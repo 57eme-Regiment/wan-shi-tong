@@ -1,0 +1,15 @@
+meta {
+  name: Sign Out
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/auth/sign-out
+  body: none
+  auth: none
+}
+
+headers {
+  cookie: {{sessionCookie}}
+}

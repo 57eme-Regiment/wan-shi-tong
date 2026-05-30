@@ -1,0 +1,15 @@
+meta {
+  name: Get Permissions
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/admin/permissions
+  body: none
+  auth: none
+}
+
+headers {
+  cookie: {{sessionCookie}}
+}

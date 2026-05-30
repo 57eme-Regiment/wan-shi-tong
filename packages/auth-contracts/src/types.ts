@@ -15,11 +15,9 @@ export const AuthorizedUserSchema = z.object({
 export type AuthorizedUser = z.infer<typeof AuthorizedUserSchema>;
 
 export const MyAccessSchema = z.object({
-  user: AuthorizedUserSchema.extend(
-    z.object({
-      avatarUrl: z.string().nullish(),
-    }),
-  ),
+  user: AuthorizedUserSchema.extend({
+    avatarUrl: z.string().nullish(),
+  }),
   appRoles: z.string().array(),
   permissions: PermissionSchema.array(),
 });

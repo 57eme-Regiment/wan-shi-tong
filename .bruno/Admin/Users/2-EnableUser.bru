@@ -1,0 +1,15 @@
+meta {
+  name: Enable User
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/admin/users/{{userId}}/enable
+  body: none
+  auth: none
+}
+
+headers {
+  cookie: {{sessionCookie}}
+}

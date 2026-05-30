@@ -2,11 +2,12 @@ import { env } from '@/config/env';
 import { container } from '@/infrastructure/container';
 import { Database } from '@/infrastructure/database';
 import { sec } from '@/lib/ms/msHelper';
-import { DiscordRoleSyncService } from '@/service/discord/discordRoleSync.service';
+import { DiscordRoleSyncService } from '@/services/discord/discordRoleSync.service';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 
-const { context } = container.resolve(Database);
+const db = new Database();
+const { context } = db;
 
 export const auth = betterAuth({
   secret: env.BETTER_AUTH_SECRET,
