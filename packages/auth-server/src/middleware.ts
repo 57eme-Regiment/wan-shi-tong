@@ -1,8 +1,11 @@
-import type { FastifyReply, FastifyRequest } from "fastify";
-import type { AuthorizedUser, Permission } from "@57eme-regiment/auth-contracts";
-import { authorizeRequest } from "./authorize";
+import type {
+  AuthorizedUser,
+  Permission,
+} from '@57eme-regiment/auth-contracts';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { authorizeRequest } from './authorize';
 
-declare module "fastify" {
+declare module 'fastify' {
   interface FastifyRequest {
     user: AuthorizedUser;
   }
@@ -11,29 +14,29 @@ declare module "fastify" {
 export function requirePermission(permission: Permission) {
   return async function (request: FastifyRequest, reply: FastifyReply) {
     const result = await authorizeRequest({
-      authServiceUrl: process.env["AUTH_SERVICE_URL"]!,
+      authServiceUrl: process.env['WANSHITONG_SERVICE_URL']!,
       cookie: request.headers.cookie,
       permission,
     });
 
     if (!result.allowed) {
-      if (result.reason === "UNAUTHENTICATED") {
+      if (result.reason === 'UNAUTHENTICATED') {
         return reply.code(401).send({
-          code: "UNAUTHENTICATED",
-          message: "Authentication required",
+          code: 'UNAUTHENTICATED',
+          message: 'Authentication required',
         });
       }
 
-      if (result.reason === "ACCOUNT_DISABLED") {
+      if (result.reason === 'ACCOUNT_DISABLED') {
         return reply.code(403).send({
-          code: "ACCOUNT_DISABLED",
-          message: "Account has been disabled",
+          code: 'ACCOUNT_DISABLED',
+          message: 'Account has been disabled',
         });
       }
 
       return reply.code(403).send({
-        code: "FORBIDDEN",
-        message: "Missing permission",
+        code: 'FORBIDDEN',
+        message: 'Missing permission',
         permission,
       });
     }
