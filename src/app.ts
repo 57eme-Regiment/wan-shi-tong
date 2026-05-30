@@ -7,15 +7,26 @@ import {
 } from '@fastify/type-provider-zod';
 import Fastify from 'fastify';
 import { authorizeRoutes } from './authorize/authorize.routes';
+import { logger } from './config/logger';
 import { authRoutes } from './lib/auth/betterAuth.route';
 import { accessRoutes } from './services/access/access.routes';
 import { adminRoutes } from './servicesAdmin/admin.routes';
 
 export function buildApp() {
-  const app = Fastify({
-    logger: {
-      level: env.NODE_ENV === 'production' ? 'info' : 'debug',
-    },
+  const app = Fastify({ logger: { level: 'error' } });
+
+  app.addHook('onRequest', (req, _reply, done) => {
+    logger.info(
+      `→ reqId:"${req.id}" ${req.method} ${req.url} msg:"incoming request"`,
+    );
+    done();
+  });
+
+  app.addHook('onResponse', (req, reply, done) => {
+    logger.info(
+      `← reqId:"${req.id}" ${req.method} ${req.url} ${reply.statusCode} ${reply.elapsedTime.toFixed(2)}ms msg:"request completed"`,
+    );
+    done();
   });
 
   app.register(cors, {

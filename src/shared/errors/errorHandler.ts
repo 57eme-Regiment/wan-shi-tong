@@ -1,3 +1,4 @@
+import { logger } from '@/config/logger';
 import { Prisma } from '@/generated/client';
 import type { FastifyError, FastifyReply, FastifyRequest } from 'fastify';
 import { ZodError } from 'zod';
@@ -9,6 +10,8 @@ export function errorHandler(
   req: FastifyRequest,
   reply: FastifyReply,
 ) {
+  logger.error(`${req.id} ${req.method} ${req.url}`, error);
+
   if (error instanceof AppError) {
     return reply.status(error.statusCode).send({
       error: error.code ?? error.name,
@@ -45,7 +48,6 @@ export function errorHandler(
     });
   }
 
-  req.log.error(error);
   return reply
     .status(500)
     .send({ error: 'INTERNAL_ERROR', message: 'Internal server error' });

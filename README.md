@@ -30,13 +30,13 @@ Le serveur démarre sur `http://wanshitong.57regiment.local:3001` par défaut.
 
 En développement, les services utilisent des domaines dédiés plutôt que des ports :
 
-| Service       | Domaine local                   | Port |
-|---------------|---------------------------------|------|
-| WanShiTong    | `wanshitong.57regiment.local`         | 3001 |
-| Renenutet     | `renenutet.57regiment.local`    | 3002 |
-| Krang         | `krang.57regiment.local`        | 3003 |
-| Hermes        | `hermes.57regiment.local`       | 5173 |
-| FoxWatcher    | `foxwatcher.57regiment.local`   | 5174 |
+| Service    | Domaine local                 | Port |
+| ---------- | ----------------------------- | ---- |
+| WanShiTong | `wanshitong.57regiment.local` | 3001 |
+| Krang      | `krang.57regiment.local`      | 3002 |
+| Renenutet  | `renenutet.57regiment.local`  | 3003 |
+| Hermes     | `hermes.57regiment.local`     | 5173 |
+| FoxWatcher | `foxwatcher.57regiment.local` | 5174 |
 
 Pour que ces domaines fonctionnent, chaque poste doit déclarer les entrées dans son fichier `hosts`.
 
@@ -128,12 +128,10 @@ CORS_ORIGINS=http://hermes.57regiment.local:5173,http://foxwatcher.57regiment.lo
 
 ### Restreindre l'accès au domaine
 
-Par défaut, l'app répond à toute requête quel que soit le hostname (`localhost`, IP, etc.).
-Pour n'accepter que `wanshitong.57regiment.local`, définir `ALLOWED_HOST` dans `.env` :
+Par défaut, l'app répond à toute requête quel que soit le hostname (`localhost`, IP, etc.). Pour n'accepter que `wanshitong.57regiment.local`, définir `ALLOWED_HOST` dans `.env` :
 
 ```env
 ALLOWED_HOST=wanshitong.57regiment.local
 ```
 
-Toute requête dont le header `Host` ne correspond pas reçoit un `404`.
-Laisser la variable vide (ou absente) pour tout accepter — utile en CI ou pour les tests automatisés.
+Toute requête dont le header `Host` ne correspond pas reçoit un `404`. Laisser la variable vide (ou absente) pour tout accepter — utile en CI ou pour les tests automatisés.
