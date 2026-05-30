@@ -2,16 +2,13 @@ import {
   fetchGuildMember,
   type GuildMember,
 } from '@/lib/discord/discordClient';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { DiscordRoleSyncRepository } from './discord-role-sync.repository';
 
 /** Synchronise les rôles Discord d'un utilisateur depuis l'API Discord vers la base de données. */
 @injectable()
 export class DiscordRoleSyncService {
-  constructor(
-    @inject(DiscordRoleSyncRepository)
-    private readonly repo: DiscordRoleSyncRepository,
-  ) {}
+  constructor(private readonly repo: DiscordRoleSyncRepository) {}
 
   /**
    * Synchronise les rôles Discord d'un utilisateur.

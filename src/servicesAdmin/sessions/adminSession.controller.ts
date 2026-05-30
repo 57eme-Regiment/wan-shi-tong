@@ -1,6 +1,6 @@
 import { PERMISSIONS } from '@57eme-regiment/auth-contracts';
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { AdminGuard } from '../adminGuard';
 import { AdminSessionService } from './adminSession.service';
 
@@ -8,8 +8,8 @@ import { AdminSessionService } from './adminSession.service';
 @injectable()
 export class AdminSessionController {
   constructor(
-    @inject(AdminGuard) private readonly guard: AdminGuard,
-    @inject(AdminSessionService) private readonly service: AdminSessionService,
+    private readonly guard: AdminGuard,
+    private readonly service: AdminSessionService,
   ) {}
 
   /** Retourne la liste de toutes les sessions actives. */
@@ -22,7 +22,10 @@ export class AdminSessionController {
    * Révoque une session par son id (204 sans corps).
    * @throws {AppError} 404 si la session est introuvable.
    */
-  async revoke(request: FastifyRequest<{ Params: { sessionId: string } }>, reply: FastifyReply) {
+  async revoke(
+    request: FastifyRequest<{ Params: { sessionId: string } }>,
+    reply: FastifyReply,
+  ) {
     await this.guard.authorize(request, PERMISSIONS.ADMIN_SESSIONS_REVOKE);
     await this.service.revoke(request.params.sessionId);
     return reply.code(204).send();

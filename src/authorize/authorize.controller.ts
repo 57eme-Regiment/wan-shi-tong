@@ -5,14 +5,13 @@ import { PermissionResolverService } from '@/services/permission/permissionResol
 import type { Permission } from '@57eme-regiment/auth-contracts';
 import { fromNodeHeaders } from 'better-auth/node';
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 
 /** Contrôleur HTTP pour la vérification de permission d'un utilisateur authentifié. */
 @injectable()
 export class AuthorizeController {
   constructor(
     private readonly db: Database,
-    @inject(PermissionResolverService)
     private readonly permService: PermissionResolverService,
   ) {}
 

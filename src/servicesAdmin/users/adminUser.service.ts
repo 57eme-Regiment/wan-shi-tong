@@ -7,16 +7,14 @@ import {
   assertEnabled,
   findUserOrThrow,
 } from '@/shared/helpers/userHelper';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 
 /** Logique métier pour l'administration des utilisateurs (activation, désactivation, synchronisation Discord). */
 @injectable()
 export class AdminUserService {
   constructor(
     private readonly db: Database,
-    @inject(DiscordRoleSyncRepository)
     private readonly syncRepo: DiscordRoleSyncRepository,
-    @inject(DiscordRoleSyncService)
     private readonly syncService: DiscordRoleSyncService,
   ) {}
 

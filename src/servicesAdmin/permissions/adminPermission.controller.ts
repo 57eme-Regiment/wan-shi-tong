@@ -1,6 +1,6 @@
 import { PERMISSIONS } from '@57eme-regiment/auth-contracts';
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { AdminGuard } from '../adminGuard';
 import { AdminPermissionService } from './adminPermission.service';
 
@@ -8,8 +8,8 @@ import { AdminPermissionService } from './adminPermission.service';
 @injectable()
 export class AdminPermissionController {
   constructor(
-    @inject(AdminGuard) private readonly guard: AdminGuard,
-    @inject(AdminPermissionService) private readonly service: AdminPermissionService,
+    private readonly guard: AdminGuard,
+    private readonly service: AdminPermissionService,
   ) {}
 
   /** Retourne la liste de toutes les permissions applicatives. */

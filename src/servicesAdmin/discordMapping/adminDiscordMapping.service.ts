@@ -1,6 +1,6 @@
 import { Database } from '@/infrastructure/database';
 import { AppError } from '@/shared/errors/appError';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { AdminDiscordMappingRepository } from './adminDiscordMapping.repository';
 
 /** Logique métier pour l'administration des mappings entre rôles Discord et rôles applicatifs. */
@@ -8,7 +8,6 @@ import { AdminDiscordMappingRepository } from './adminDiscordMapping.repository'
 export class AdminDiscordMappingService {
   constructor(
     private readonly db: Database,
-    @inject(AdminDiscordMappingRepository)
     private readonly repo: AdminDiscordMappingRepository,
   ) {}
 
@@ -22,8 +21,14 @@ export class AdminDiscordMappingService {
    * puis invalide les snapshots des utilisateurs concernés.
    * @throws {AppError} 404 si le rôle applicatif correspondant à la clé est introuvable.
    */
-  async create(data: { guildId: string; discordRoleId: string; roleKey: string }) {
-    const role = await this.db.context.role.findUnique({ where: { key: data.roleKey } });
+  async create(data: {
+    guildId: string;
+    discordRoleId: string;
+    roleKey: string;
+  }) {
+    const role = await this.db.context.role.findUnique({
+      where: { key: data.roleKey },
+    });
     if (!role) throw new AppError('Role not found', 404, 'ROLE_NOT_FOUND');
 
     const mapping = await this.repo.create({
@@ -40,7 +45,7 @@ export class AdminDiscordMappingService {
 
     if (affected.length > 0) {
       await this.db.context.userAccessSnapshot.deleteMany({
-        where: { userId: { in: affected.map((u) => u.userId) } },
+        where: { userId: { in: affected.map(u => u.userId) } },
       });
     }
 
@@ -53,18 +58,19 @@ export class AdminDiscordMappingService {
    */
   async delete(id: string) {
     const mapping = await this.repo.findById(id);
-    if (!mapping) throw new AppError('Mapping not found', 404, 'MAPPING_NOT_FOUND');
+    if (!mapping)
+      throw new AppError('Mapping not found', 404, 'MAPPING_NOT_FOUND');
 
     const affected = await this.db.context.discordUserRole.findMany({
       where: { guildId: mapping.guildId, discordRoleId: mapping.discordRoleId },
       select: { userId: true },
     });
 
-    await this.db.context.$transaction(async (tx) => {
+    await this.db.context.$transaction(async tx => {
       await tx.discordRoleMapping.delete({ where: { id } });
       if (affected.length > 0) {
         await tx.userAccessSnapshot.deleteMany({
-          where: { userId: { in: affected.map((u) => u.userId) } },
+          where: { userId: { in: affected.map(u => u.userId) } },
         });
       }
     });

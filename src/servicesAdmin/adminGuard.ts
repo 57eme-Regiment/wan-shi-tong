@@ -7,14 +7,13 @@ import { assertEnabled, findUserOrThrow } from '@/shared/helpers/userHelper';
 import type { Permission } from '@57eme-regiment/auth-contracts';
 import { fromNodeHeaders } from 'better-auth/node';
 import type { FastifyRequest } from 'fastify';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 
 /** Garde d'accès partagé pour les routes d'administration. */
 @injectable()
 export class AdminGuard {
   constructor(
     private readonly db: Database,
-    @inject(PermissionResolverService)
     private readonly permService: PermissionResolverService,
   ) {}
 

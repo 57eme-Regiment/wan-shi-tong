@@ -1,6 +1,6 @@
 import { Database } from '@/infrastructure/database';
 import { AppError } from '@/shared/errors/appError';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { AdminRoleRepository } from './adminRole.repository';
 
 /** Logique métier pour l'administration des rôles applicatifs. */
@@ -8,7 +8,6 @@ import { AdminRoleRepository } from './adminRole.repository';
 export class AdminRoleService {
   constructor(
     private readonly db: Database,
-    @inject(AdminRoleRepository)
     private readonly repo: AdminRoleRepository,
   ) {}
 
@@ -36,7 +35,10 @@ export class AdminRoleService {
    * Met à jour un rôle et invalide tous les snapshots d'accès utilisateurs.
    * @throws {AppError} 404 si le rôle est introuvable.
    */
-  async update(id: string, data: { key?: string; name?: string; description?: string | null }) {
+  async update(
+    id: string,
+    data: { key?: string; name?: string; description?: string | null },
+  ) {
     await this.getById(id);
     const role = await this.repo.update(id, data);
     await this.db.context.userAccessSnapshot.deleteMany({});
@@ -49,7 +51,7 @@ export class AdminRoleService {
    */
   async delete(id: string) {
     await this.getById(id);
-    await this.db.context.$transaction(async (tx) => {
+    await this.db.context.$transaction(async tx => {
       await tx.role.delete({ where: { id } });
       await tx.userAccessSnapshot.deleteMany({});
     });

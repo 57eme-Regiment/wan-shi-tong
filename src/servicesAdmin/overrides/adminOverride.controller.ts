@@ -1,6 +1,6 @@
 import { PERMISSIONS } from '@57eme-regiment/auth-contracts';
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { AdminGuard } from '../adminGuard';
 import { AdminOverrideService } from './adminOverride.service';
 
@@ -8,12 +8,15 @@ import { AdminOverrideService } from './adminOverride.service';
 @injectable()
 export class AdminOverrideController {
   constructor(
-    @inject(AdminGuard) private readonly guard: AdminGuard,
-    @inject(AdminOverrideService) private readonly service: AdminOverrideService,
+    private readonly guard: AdminGuard,
+    private readonly service: AdminOverrideService,
   ) {}
 
   /** Retourne tous les overrides de permissions associés à un utilisateur. */
-  async getByUser(request: FastifyRequest<{ Params: { userId: string } }>, reply: FastifyReply) {
+  async getByUser(
+    request: FastifyRequest<{ Params: { userId: string } }>,
+    reply: FastifyReply,
+  ) {
     await this.guard.authorize(request, PERMISSIONS.ADMIN_PERMISSIONS_READ);
     return reply.send(await this.service.getByUser(request.params.userId));
   }
@@ -22,14 +25,23 @@ export class AdminOverrideController {
   async upsert(
     request: FastifyRequest<{
       Params: { userId: string };
-      Body: { permissionKey: string; effect: 'allow' | 'deny'; reason?: string };
+      Body: {
+        permissionKey: string;
+        effect: 'allow' | 'deny';
+        reason?: string;
+      };
     }>,
     reply: FastifyReply,
   ) {
     await this.guard.authorize(request, PERMISSIONS.ADMIN_PERMISSIONS_MANAGE);
-    return reply.code(201).send(
-      await this.service.upsert({ userId: request.params.userId, ...request.body }),
-    );
+    return reply
+      .code(201)
+      .send(
+        await this.service.upsert({
+          userId: request.params.userId,
+          ...request.body,
+        }),
+      );
   }
 
   /**
@@ -37,11 +49,16 @@ export class AdminOverrideController {
    * @throws {AppError} 404 si l'override est introuvable.
    */
   async delete(
-    request: FastifyRequest<{ Params: { userId: string; permissionKey: string } }>,
+    request: FastifyRequest<{
+      Params: { userId: string; permissionKey: string };
+    }>,
     reply: FastifyReply,
   ) {
     await this.guard.authorize(request, PERMISSIONS.ADMIN_PERMISSIONS_MANAGE);
-    await this.service.delete(request.params.userId, request.params.permissionKey);
+    await this.service.delete(
+      request.params.userId,
+      request.params.permissionKey,
+    );
     return reply.code(204).send();
   }
 }

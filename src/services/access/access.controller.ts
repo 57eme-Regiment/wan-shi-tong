@@ -5,14 +5,13 @@ import { PermissionResolverService } from '@/services/permission/permissionResol
 import { assertEnabled, findUserOrThrow } from '@/shared/helpers/userHelper';
 import { fromNodeHeaders } from 'better-auth/node';
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 
 /** Contrôleur HTTP pour les informations du compte courant. */
 @injectable()
 export class AccessController {
   constructor(
     private readonly db: Database,
-    @inject(PermissionResolverService)
     private readonly permService: PermissionResolverService,
   ) {}
 

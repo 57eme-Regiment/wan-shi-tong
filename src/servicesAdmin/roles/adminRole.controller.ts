@@ -1,6 +1,6 @@
 import { PERMISSIONS } from '@57eme-regiment/auth-contracts';
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { AdminGuard } from '../adminGuard';
 import { AdminRoleService } from './adminRole.service';
 
@@ -8,8 +8,8 @@ import { AdminRoleService } from './adminRole.service';
 @injectable()
 export class AdminRoleController {
   constructor(
-    @inject(AdminGuard) private readonly guard: AdminGuard,
-    @inject(AdminRoleService) private readonly service: AdminRoleService,
+    private readonly guard: AdminGuard,
+    private readonly service: AdminRoleService,
   ) {}
 
   /** Retourne la liste de tous les rôles applicatifs. */
@@ -20,7 +20,9 @@ export class AdminRoleController {
 
   /** Crée un nouveau rôle applicatif et retourne la ressource créée (201). */
   async create(
-    request: FastifyRequest<{ Body: { key: string; name: string; description?: string } }>,
+    request: FastifyRequest<{
+      Body: { key: string; name: string; description?: string };
+    }>,
     reply: FastifyReply,
   ) {
     await this.guard.authorize(request, PERMISSIONS.ADMIN_ROLES_MANAGE);
@@ -32,11 +34,16 @@ export class AdminRoleController {
    * @throws {AppError} 404 si le rôle est introuvable.
    */
   async update(
-    request: FastifyRequest<{ Params: { id: string }; Body: { key?: string; name?: string; description?: string | null } }>,
+    request: FastifyRequest<{
+      Params: { id: string };
+      Body: { key?: string; name?: string; description?: string | null };
+    }>,
     reply: FastifyReply,
   ) {
     await this.guard.authorize(request, PERMISSIONS.ADMIN_ROLES_MANAGE);
-    return reply.send(await this.service.update(request.params.id, request.body));
+    return reply.send(
+      await this.service.update(request.params.id, request.body),
+    );
   }
 
   /**

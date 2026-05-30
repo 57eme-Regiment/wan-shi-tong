@@ -1,7 +1,7 @@
 import { env } from '@/config/env';
 import { PERMISSIONS } from '@57eme-regiment/auth-contracts';
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { AdminGuard } from '../adminGuard';
 import { AdminUserService } from './adminUser.service';
 
@@ -9,8 +9,8 @@ import { AdminUserService } from './adminUser.service';
 @injectable()
 export class AdminUserController {
   constructor(
-    @inject(AdminGuard) private readonly guard: AdminGuard,
-    @inject(AdminUserService) private readonly service: AdminUserService,
+    private readonly guard: AdminGuard,
+    private readonly service: AdminUserService,
   ) {}
 
   /**
@@ -18,11 +18,17 @@ export class AdminUserController {
    * @throws {AppError} 404 si l'utilisateur est introuvable.
    */
   async disable(
-    request: FastifyRequest<{ Params: { userId: string }; Body: { reason?: string } }>,
+    request: FastifyRequest<{
+      Params: { userId: string };
+      Body: { reason?: string };
+    }>,
     reply: FastifyReply,
   ) {
     await this.guard.authorize(request, PERMISSIONS.ADMIN_USERS_MANAGE);
-    await this.service.disable(request.params.userId, request.body.reason ?? 'Disabled by admin');
+    await this.service.disable(
+      request.params.userId,
+      request.body.reason ?? 'Disabled by admin',
+    );
     return reply.code(204).send();
   }
 
@@ -30,7 +36,10 @@ export class AdminUserController {
    * Réactive le compte d'un utilisateur désactivé (204 sans corps).
    * @throws {AppError} 404 si l'utilisateur est introuvable, 409 s'il n'est pas désactivé.
    */
-  async enable(request: FastifyRequest<{ Params: { userId: string } }>, reply: FastifyReply) {
+  async enable(
+    request: FastifyRequest<{ Params: { userId: string } }>,
+    reply: FastifyReply,
+  ) {
     await this.guard.authorize(request, PERMISSIONS.ADMIN_USERS_MANAGE);
     await this.service.enable(request.params.userId);
     return reply.code(204).send();
@@ -40,7 +49,10 @@ export class AdminUserController {
    * Synchronise les rôles Discord d'un utilisateur depuis le serveur configuré (204 sans corps).
    * @throws {AppError} 404 si l'utilisateur est introuvable.
    */
-  async syncDiscord(request: FastifyRequest<{ Params: { userId: string } }>, reply: FastifyReply) {
+  async syncDiscord(
+    request: FastifyRequest<{ Params: { userId: string } }>,
+    reply: FastifyReply,
+  ) {
     await this.guard.authorize(request, PERMISSIONS.ADMIN_USERS_MANAGE);
     await this.service.syncDiscord(request.params.userId, env.DISCORD_GUILD_ID);
     return reply.code(204).send();

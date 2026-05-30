@@ -1,6 +1,6 @@
 import { Database } from '@/infrastructure/database';
 import { AppError } from '@/shared/errors/appError';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { AdminOverrideRepository } from './adminOverride.repository';
 
 /** Logique métier pour l'administration des overrides de permissions par utilisateur. */
@@ -8,7 +8,6 @@ import { AdminOverrideRepository } from './adminOverride.repository';
 export class AdminOverrideService {
   constructor(
     private readonly db: Database,
-    @inject(AdminOverrideRepository)
     private readonly repo: AdminOverrideRepository,
   ) {}
 
@@ -31,7 +30,8 @@ export class AdminOverrideService {
     const permission = await this.db.context.permission.findUnique({
       where: { key: data.permissionKey },
     });
-    if (!permission) throw new AppError('Permission not found', 404, 'PERMISSION_NOT_FOUND');
+    if (!permission)
+      throw new AppError('Permission not found', 404, 'PERMISSION_NOT_FOUND');
 
     const override = await this.repo.upsert({
       userId: data.userId,
@@ -40,7 +40,9 @@ export class AdminOverrideService {
       reason: data.reason,
     });
 
-    await this.db.context.userAccessSnapshot.deleteMany({ where: { userId: data.userId } });
+    await this.db.context.userAccessSnapshot.deleteMany({
+      where: { userId: data.userId },
+    });
 
     return override;
   }
@@ -53,12 +55,14 @@ export class AdminOverrideService {
     const permission = await this.db.context.permission.findUnique({
       where: { key: permissionKey },
     });
-    if (!permission) throw new AppError('Permission not found', 404, 'PERMISSION_NOT_FOUND');
+    if (!permission)
+      throw new AppError('Permission not found', 404, 'PERMISSION_NOT_FOUND');
 
     const existing = await this.repo.findByKey(userId, permission.id);
-    if (!existing) throw new AppError('Override not found', 404, 'OVERRIDE_NOT_FOUND');
+    if (!existing)
+      throw new AppError('Override not found', 404, 'OVERRIDE_NOT_FOUND');
 
-    await this.db.context.$transaction(async (tx) => {
+    await this.db.context.$transaction(async tx => {
       await tx.userPermissionOverride.delete({
         where: { userId_permissionId: { userId, permissionId: permission.id } },
       });

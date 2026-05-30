@@ -1,6 +1,6 @@
 import { env } from '@/config/env';
 import ms from 'ms';
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import {
   resolvePermissions,
   type PermissionResolution,
@@ -10,10 +10,7 @@ import { PermissionResolverRepository } from './permissionResolver.repository';
 /** Résout les permissions effectives d'un utilisateur, avec mise en cache via snapshot. */
 @injectable()
 export class PermissionResolverService {
-  constructor(
-    @inject(PermissionResolverRepository)
-    private readonly repo: PermissionResolverRepository,
-  ) {}
+  constructor(private readonly repo: PermissionResolverRepository) {}
 
   /**
    * Retourne les permissions et rôles applicatifs d'un utilisateur pour un serveur Discord donné.
