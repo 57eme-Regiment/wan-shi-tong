@@ -15,6 +15,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - uses: pnpm/action-setup@v4
 
@@ -27,61 +29,87 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build packages
-        run: |
-          pnpm --filter @57eme-regiment/auth-contracts build
-          pnpm --filter @57eme-regiment/auth-server build
-          pnpm --filter @57eme-regiment/auth-browser build
+      # ── Détection ─────────────────────────────────────────────────────────
+      - name: Detect changed packages
+        id: changes
+        uses: ./.github/actions/detect-changes
+        with:
+          base-sha: ${{ github.event.before }}
+          head-sha: ${{ github.sha }}
 
-      - name: Auto-bump + publish stable (main)
-        if: github.ref == 'refs/heads/main'
+      # ── Build ─────────────────────────────────────────────────────────────
+      - name: Build changed packages
+        uses: ./.github/actions/build-packages
+        with:
+          auth-contracts: ${{ steps.changes.outputs.auth-contracts }}
+          auth-server:    ${{ steps.changes.outputs.auth-server }}
+          auth-browser:   ${{ steps.changes.outputs.auth-browser }}
+
+      # ── Publish stable (main) ─────────────────────────────────────────────
+      - name: Publish auth-contracts (latest)
+        id: pub-contracts
+        if: github.ref == 'refs/heads/main' && steps.changes.outputs.auth-contracts == 'true'
+        uses: ./.github/actions/publish-package
+        with:
+          package:         auth-contracts
+          tag:             latest
+          node-auth-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish auth-server (latest)
+        id: pub-server
+        if: github.ref == 'refs/heads/main' && steps.changes.outputs.auth-server == 'true'
+        uses: ./.github/actions/publish-package
+        with:
+          package:         auth-server
+          tag:             latest
+          node-auth-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish auth-browser (latest)
+        id: pub-browser
+        if: github.ref == 'refs/heads/main' && steps.changes.outputs.auth-browser == 'true'
+        uses: ./.github/actions/publish-package
+        with:
+          package:         auth-browser
+          tag:             latest
+          node-auth-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit version bumps
+        if: |
+          github.ref == 'refs/heads/main' && (
+            steps.pub-contracts.outputs.bumped == 'true' ||
+            steps.pub-server.outputs.bumped    == 'true' ||
+            steps.pub-browser.outputs.bumped   == 'true'
+          )
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: bump packages minor version [skip ci]"
+          git push
 
-          BUMPED=false
+      # ── Publish beta (autres branches) ────────────────────────────────────
+      - name: Publish auth-contracts (beta)
+        if: github.ref != 'refs/heads/main' && steps.changes.outputs.auth-contracts == 'true'
+        uses: ./.github/actions/publish-package
+        with:
+          package:         auth-contracts
+          tag:             beta
+          run-number:      ${{ github.run_number }}
+          node-auth-token: ${{ secrets.GITHUB_TOKEN }}
 
-          for PKG in auth-contracts auth-server auth-browser; do
-            PKG_NAME="@57eme-regiment/$PKG"
-            PKG_DIR="packages/$PKG"
+      - name: Publish auth-server (beta)
+        if: github.ref != 'refs/heads/main' && steps.changes.outputs.auth-server == 'true'
+        uses: ./.github/actions/publish-package
+        with:
+          package:         auth-server
+          tag:             beta
+          run-number:      ${{ github.run_number }}
+          node-auth-token: ${{ secrets.GITHUB_TOKEN }}
 
-            LOCAL=$(node -p "require('./$PKG_DIR/package.json').version")
-            PUBLISHED=$(npm view "$PKG_NAME" version --registry https://npm.pkg.github.com 2>/dev/null || echo "none")
-
-            echo "[$PKG] Local: $LOCAL | Published: $PUBLISHED"
-
-            if [ "$LOCAL" = "$PUBLISHED" ]; then
-              echo "[$PKG] Versions match — bumping minor"
-              npm version minor --no-git-tag-version --prefix "$PKG_DIR"
-              git add "$PKG_DIR/package.json"
-              BUMPED=true
-            else
-              echo "[$PKG] Local version differs — skipping auto-bump"
-            fi
-
-            (cd "$PKG_DIR" && pnpm publish --no-git-checks --access public --tag latest)
-          done
-
-          if [ "$BUMPED" = true ]; then
-            git commit -m "chore: bump packages minor version [skip ci]"
-            git push
-          fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Compute beta versions and publish (non-main)
-        if: github.ref != 'refs/heads/main'
-        run: |
-          for PKG in auth-contracts auth-server auth-browser; do
-            PKG_DIR="packages/$PKG"
-
-            CURRENT=$(node -p "require('./$PKG_DIR/package.json').version")
-            BETA_VERSION="${CURRENT}-beta.${{ github.run_number }}"
-
-            echo "[$PKG] Publishing beta version: $BETA_VERSION"
-            npm version "$BETA_VERSION" --no-git-tag-version --prefix "$PKG_DIR"
-
-            (cd "$PKG_DIR" && pnpm publish --no-git-checks --access public --tag beta)
-          done
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish auth-browser (beta)
+        if: github.ref != 'refs/heads/main' && steps.changes.outputs.auth-browser == 'true'
+        uses: ./.github/actions/publish-package
+        with:
+          package:         auth-browser
+          tag:             beta
+          run-number:      ${{ github.run_number }}
+          node-auth-token: ${{ secrets.GITHUB_TOKEN }}

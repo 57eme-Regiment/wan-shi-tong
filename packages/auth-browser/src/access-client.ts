@@ -1,13 +1,16 @@
+import type {
+  AccessMeResponse,
+  Permission,
+} from '@57eme-regiment/auth-contracts';
 import {
   accessContract,
   AccessMeResponseSchema,
-} from "@57eme-regiment/auth-contracts";
-import type { AccessMeResponse, Permission } from "@57eme-regiment/auth-contracts";
+} from '@57eme-regiment/auth-contracts';
 
 export function createAccessClient(baseUrl: string) {
   async function getMyAccess(): Promise<AccessMeResponse | null> {
     const res = await fetch(`${baseUrl}${accessContract.me.path}`, {
-      credentials: "include",
+      credentials: 'include',
     });
 
     if (!res.ok) return null;
@@ -17,8 +20,9 @@ export function createAccessClient(baseUrl: string) {
 
   function hasPermission(
     access: AccessMeResponse | null,
-    permission: Permission,
+    permission: Permission | null,
   ): boolean {
+    if (!permission) return true;
     return access?.permissions.includes(permission) ?? false;
   }
 

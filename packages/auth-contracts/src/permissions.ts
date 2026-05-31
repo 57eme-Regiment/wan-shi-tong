@@ -52,6 +52,7 @@ export const PERMISSIONS = {
   KRANG_REGION_DELETE: 'krang:region:delete',
 
   // Admin — Utilisateurs
+  COUCOU: 'admin:wanshitong:read',
   ADMIN_USERS_READ: 'admin:users:read',
   ADMIN_USERS_MANAGE: 'admin:users:manage',
 

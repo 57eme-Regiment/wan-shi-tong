@@ -1,0 +1,59 @@
+name: Publish Package
+description: Bumpe la version et publie un package sur GitHub Packages.
+
+inputs:
+  package:
+    description: Nom du package (ex. auth-contracts)
+    required: true
+  tag:
+    description: Tag npm — latest (stable) ou beta
+    required: true
+  run-number:
+    description: Numéro du workflow run (pour les beta)
+    required: false
+    default: '0'
+  node-auth-token:
+    description: Token GitHub pour publier
+    required: true
+
+outputs:
+  bumped:
+    description: true si la version a été bumped (stable uniquement)
+    value: ${{ steps.publish.outputs.bumped }}
+
+runs:
+  using: composite
+  steps:
+    - id: publish
+      shell: bash
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.node-auth-token }}
+      run: |
+        PKG="${{ inputs.package }}"
+        PKG_DIR="packages/$PKG"
+        PKG_NAME="@57eme-regiment/$PKG"
+        TAG="${{ inputs.tag }}"
+
+        if [ "$TAG" = "latest" ]; then
+          LOCAL=$(node -p "require('./$PKG_DIR/package.json').version")
+          PUBLISHED=$(npm view "$PKG_NAME" version --registry https://npm.pkg.github.com 2>/dev/null || echo "none")
+
+          echo "[$PKG] Local: $LOCAL | Published: $PUBLISHED"
+
+          if [ "$LOCAL" = "$PUBLISHED" ]; then
+            echo "[$PKG] Bump mineur"
+            npm version minor --no-git-tag-version --prefix "$PKG_DIR"
+            git add "$PKG_DIR/package.json"
+            echo "bumped=true" >> $GITHUB_OUTPUT
+          else
+            echo "bumped=false" >> $GITHUB_OUTPUT
+          fi
+        else
+          CURRENT=$(node -p "require('./$PKG_DIR/package.json').version")
+          BETA="${CURRENT}-beta.${{ inputs.run-number }}"
+          echo "[$PKG] Beta: $BETA"
+          npm version "$BETA" --no-git-tag-version --prefix "$PKG_DIR"
+          echo "bumped=false" >> $GITHUB_OUTPUT
+        fi
+
+        (cd "$PKG_DIR" && pnpm publish --no-git-checks --access public --tag "$TAG")
