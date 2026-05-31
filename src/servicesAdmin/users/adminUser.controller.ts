@@ -13,6 +13,12 @@ export class AdminUserController {
     private readonly service: AdminUserService,
   ) {}
 
+  /** Retourne la liste de tous les utilisateurs avec leurs sessions actives. */
+  async getAll(request: FastifyRequest, reply: FastifyReply) {
+    await this.guard.authorize(request, PERMISSIONS.ADMIN_USERS_READ);
+    return reply.send(await this.service.getAll());
+  }
+
   /**
    * Désactive le compte d'un utilisateur (204 sans corps).
    * @throws {AppError} 404 si l'utilisateur est introuvable.

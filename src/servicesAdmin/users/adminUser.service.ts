@@ -18,6 +18,19 @@ export class AdminUserService {
     private readonly syncService: DiscordRoleSyncService,
   ) {}
 
+  /** Retourne tous les utilisateurs avec leurs sessions actives. */
+  getAll() {
+    return this.db.context.user.findMany({
+      orderBy: { createdAt: 'asc' },
+      include: {
+        sessions: {
+          where: { expiresAt: { gt: new Date() } },
+          select: { id: true, userId: true, expiresAt: true, createdAt: true, ipAddress: true, userAgent: true },
+        },
+      },
+    });
+  }
+
   /**
    * Désactive un utilisateur avec un motif et invalide ses données de synchronisation.
    * @throws {AppError} 404 si l'utilisateur est introuvable ou déjà désactivé.

@@ -46,6 +46,58 @@ export class AdminRoleService {
   }
 
   /**
+   * Retourne les permissions assignées à un rôle.
+   * @throws {AppError} 404 si le rôle est introuvable.
+   */
+  async getPermissions(roleId: string) {
+    await this.getById(roleId);
+    const links = await this.db.context.rolePermission.findMany({
+      where: { roleId },
+      include: { permission: { select: { id: true, key: true, description: true } } },
+    });
+    return links.map((l) => l.permission);
+  }
+
+  /**
+   * Ajoute une permission à un rôle et invalide les snapshots impactés.
+   * @throws {AppError} 404 si le rôle ou la permission est introuvable.
+   * @throws {AppError} 409 si la permission est déjà assignée au rôle.
+   */
+  async addPermission(roleId: string, permissionId: string) {
+    await this.getById(roleId);
+    const permission = await this.db.context.permission.findUnique({ where: { id: permissionId } });
+    if (!permission) throw new AppError('Permission not found', 404, 'PERMISSION_NOT_FOUND');
+
+    const existing = await this.db.context.rolePermission.findUnique({
+      where: { roleId_permissionId: { roleId, permissionId } },
+    });
+    if (existing) throw new AppError('Permission already assigned to role', 409, 'ALREADY_ASSIGNED');
+
+    await this.db.context.$transaction(async (tx) => {
+      await tx.rolePermission.create({ data: { roleId, permissionId } });
+      await tx.userAccessSnapshot.deleteMany({});
+    });
+
+    return permission;
+  }
+
+  /**
+   * Retire une permission d'un rôle et invalide les snapshots impactés.
+   * @throws {AppError} 404 si le lien rôle-permission est introuvable.
+   */
+  async removePermission(roleId: string, permissionId: string) {
+    const link = await this.db.context.rolePermission.findUnique({
+      where: { roleId_permissionId: { roleId, permissionId } },
+    });
+    if (!link) throw new AppError('Permission not assigned to this role', 404, 'NOT_ASSIGNED');
+
+    await this.db.context.$transaction(async (tx) => {
+      await tx.rolePermission.delete({ where: { roleId_permissionId: { roleId, permissionId } } });
+      await tx.userAccessSnapshot.deleteMany({});
+    });
+  }
+
+  /**
    * Supprime un rôle et invalide tous les snapshots d'accès utilisateurs dans une transaction.
    * @throws {AppError} 404 si le rôle est introuvable.
    */

@@ -28,11 +28,26 @@ export const UpdateRoleSchema = CreateRoleSchema.partial().extend({
   description: z.string().nullable().optional(),
 });
 
-export const RoleParamsSchema = z.object({ id: z.string().uuid() });
+export const RoleParamsSchema = z.object({ id: z.string() });
+
+export const RolePermissionItemSchema = z.object({
+  id: z.string(),
+  key: z.string(),
+  description: z.string().nullable(),
+});
+
+export const AddRolePermissionSchema = z.object({ permissionId: z.string() });
+
+export const RolePermissionParamsSchema = z.object({
+  roleId: z.string(),
+  permissionId: z.string(),
+});
 
 export type AdminRole = z.infer<typeof AdminRoleSchema>;
 export type CreateRole = z.infer<typeof CreateRoleSchema>;
 export type UpdateRole = z.infer<typeof UpdateRoleSchema>;
+export type RolePermissionItem = z.infer<typeof RolePermissionItemSchema>;
+export type AddRolePermission = z.infer<typeof AddRolePermissionSchema>;
 
 // ---------------------------------------------------------------------------
 // Permissions
@@ -45,7 +60,21 @@ export const AdminPermissionSchema = z.object({
   createdAt: z.coerce.date(),
 });
 
+export const CreatePermissionSchema = AdminPermissionSchema.omit({
+  id: true,
+  createdAt: true,
+});
+
+export const UpdatePermissionSchema = CreatePermissionSchema.partial();
+
+export const DeletePermissionSchema = z.object({
+  id: z.string(),
+});
+
 export type AdminPermission = z.infer<typeof AdminPermissionSchema>;
+export type CreatePermission = z.infer<typeof CreatePermissionSchema>;
+export type UpdatePermission = z.infer<typeof UpdatePermissionSchema>;
+export type DeletePermission = z.infer<typeof DeletePermissionSchema>;
 
 // ---------------------------------------------------------------------------
 // Discord Mappings
@@ -113,7 +142,21 @@ export const AdminSessionSchema = z.object({
 });
 
 export const SessionParamsSchema = z.object({ sessionId: z.string() });
+
+// ---------------------------------------------------------------------------
+// Users
+// ---------------------------------------------------------------------------
+export const AdminUserSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  image: z.url().nullish(),
+  disabledAt: z.date().nullish(),
+  disabledReason: z.string().nullish(),
+  isSuperAdmin: z.boolean().default(false),
+  sessions: AdminSessionSchema.array().nullish(),
+});
 export const UserParamsSchema = z.object({ userId: z.string() });
 export const DisableUserSchema = z.object({ reason: z.string().optional() });
 
 export type AdminSession = z.infer<typeof AdminSessionSchema>;
+export type AdminUser = z.infer<typeof AdminUserSchema>;

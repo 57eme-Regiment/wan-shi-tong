@@ -1,5 +1,5 @@
 import { container } from '@/infrastructure/container';
-import { AdminErrorSchema, DisableUserSchema, UserParamsSchema } from '@57eme-regiment/auth-contracts';
+import { AdminErrorSchema, AdminUserSchema, DisableUserSchema, UserParamsSchema } from '@57eme-regiment/auth-contracts';
 import { ZodTypeProvider } from '@fastify/type-provider-zod';
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
@@ -13,6 +13,13 @@ import { AdminUserController } from './adminUser.controller';
 export async function adminUserRoutes(app: FastifyInstance) {
   const ctrl = container.resolve(AdminUserController);
   const server = app.withTypeProvider<ZodTypeProvider>();
+
+  /** Retourne la liste de tous les utilisateurs avec leurs sessions actives. */
+  server.get('/', {
+    schema: {
+      response: { 200: AdminUserSchema.array(), 401: AdminErrorSchema, 403: AdminErrorSchema },
+    },
+  }, ctrl.getAll.bind(ctrl));
 
   /** Désactive le compte d'un utilisateur identifié par son userId. */
   server.post('/:userId/disable', {
