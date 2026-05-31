@@ -1,0 +1,15 @@
+meta {
+  name: Get All Users
+  type: http
+  seq: 0
+}
+
+get {
+  url: {{baseUrl}}/admin/users
+  body: none
+  auth: none
+}
+
+headers {
+  cookie: {{sessionCookie}}
+}

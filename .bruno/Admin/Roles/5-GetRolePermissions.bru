@@ -1,0 +1,15 @@
+meta {
+  name: Get Role Permissions
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/admin/roles/{{roleId}}/permissions
+  body: none
+  auth: none
+}
+
+headers {
+  cookie: {{sessionCookie}}
+}

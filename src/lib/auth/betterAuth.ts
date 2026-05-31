@@ -44,6 +44,7 @@ export const auth = betterAuth({
     },
   },
   session: {
+    preserveSessionInDatabase: true,
     expiresIn: sec('6d'),
     updateAge: sec(env.SESSION_REFRESH_TIME),
   },

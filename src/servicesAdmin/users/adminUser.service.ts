@@ -24,8 +24,14 @@ export class AdminUserService {
       orderBy: { createdAt: 'asc' },
       include: {
         sessions: {
-          where: { expiresAt: { gt: new Date() } },
-          select: { id: true, userId: true, expiresAt: true, createdAt: true, ipAddress: true, userAgent: true },
+          select: {
+            id: true,
+            userId: true,
+            expiresAt: true,
+            createdAt: true,
+            ipAddress: true,
+            userAgent: true,
+          },
         },
       },
     });
@@ -63,7 +69,7 @@ export class AdminUserService {
     const user = await findUserOrThrow(this.db, userId);
     if (user.isSuperAdmin === value) return;
 
-    await this.db.context.$transaction(async (tx) => {
+    await this.db.context.$transaction(async tx => {
       await tx.user.update({
         where: { id: userId },
         data: { isSuperAdmin: value },

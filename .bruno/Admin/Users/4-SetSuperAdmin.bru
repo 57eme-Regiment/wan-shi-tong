@@ -1,0 +1,21 @@
+meta {
+  name: Set Super Admin
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/admin/users/{{userId}}/super-admin
+  body: json
+  auth: none
+}
+
+headers {
+  cookie: {{sessionCookie}}
+}
+
+body:json {
+  {
+    "value": true
+  }
+}

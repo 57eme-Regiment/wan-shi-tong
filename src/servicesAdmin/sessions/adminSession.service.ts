@@ -20,8 +20,11 @@ export class AdminSessionService {
    * @throws {AppError} 404 si la session est introuvable.
    */
   async revoke(sessionId: string) {
-    const session = await this.db.context.session.findUnique({ where: { id: sessionId } });
-    if (!session) throw new AppError('Session not found', 404, 'SESSION_NOT_FOUND');
+    const session = await this.db.context.session.findUnique({
+      where: { id: sessionId },
+    });
+    if (!session)
+      throw new AppError('Session not found', 404, 'SESSION_NOT_FOUND');
     await this.db.context.session.delete({ where: { id: sessionId } });
   }
 }

@@ -1,0 +1,21 @@
+meta {
+  name: Update Permission
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/admin/permissions/{{permissionId}}
+  body: json
+  auth: none
+}
+
+headers {
+  cookie: {{sessionCookie}}
+}
+
+body:json {
+  {
+    "description": "Description mise à jour"
+  }
+}
