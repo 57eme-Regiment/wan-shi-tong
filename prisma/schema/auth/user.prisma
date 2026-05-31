@@ -9,6 +9,7 @@ model User {
 
   disabledAt      DateTime? @db.Timestamptz(3)
   disabledReason  String?
+  isSuperAdmin    Boolean   @default(false)
 
   sessions        Session[]
   accounts        Account[]

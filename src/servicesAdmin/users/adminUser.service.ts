@@ -42,6 +42,24 @@ export class AdminUserService {
   }
 
   /**
+   * Active ou désactive le statut super admin d'un utilisateur.
+   * Invalide le snapshot de permissions si le statut change.
+   * @throws {AppError} 404 si l'utilisateur est introuvable.
+   */
+  async setSuperAdmin(userId: string, value: boolean) {
+    const user = await findUserOrThrow(this.db, userId);
+    if (user.isSuperAdmin === value) return;
+
+    await this.db.context.$transaction(async (tx) => {
+      await tx.user.update({
+        where: { id: userId },
+        data: { isSuperAdmin: value },
+      });
+      await tx.userAccessSnapshot.deleteMany({ where: { userId } });
+    });
+  }
+
+  /**
    * Déclenche la synchronisation des rôles Discord pour un utilisateur sur un serveur donné.
    * @throws {AppError} 404 si aucun compte Discord n'est lié à l'utilisateur.
    */

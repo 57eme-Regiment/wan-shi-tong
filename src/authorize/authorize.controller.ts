@@ -43,6 +43,17 @@ export class AuthorizeController {
       return reply.send({ allowed: false, reason: 'ACCOUNT_DISABLED' });
     }
 
+    if (user.isSuperAdmin) {
+      return reply.send({
+        allowed: true,
+        user: {
+          id: user.id,
+          discordUserId: account?.accountId ?? '',
+          username: user.name,
+        },
+      });
+    }
+
     const { permissions } = await this.permService.resolveForUser(
       user.id,
       env.DISCORD_GUILD_ID,

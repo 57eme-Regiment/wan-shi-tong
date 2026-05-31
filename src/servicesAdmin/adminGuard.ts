@@ -34,6 +34,8 @@ export class AdminGuard {
     const user = await findUserOrThrow(this.db, session.user.id);
     assertEnabled(user);
 
+    if (user.isSuperAdmin) return user.id;
+
     const { permissions } = await this.permService.resolveForUser(
       user.id,
       env.DISCORD_GUILD_ID,

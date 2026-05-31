@@ -31,6 +31,15 @@ export async function adminUserRoutes(app: FastifyInstance) {
     },
   }, ctrl.enable.bind(ctrl));
 
+  /** Active ou désactive le statut super admin d'un utilisateur. */
+  server.post('/:userId/super-admin', {
+    schema: {
+      params: UserParamsSchema,
+      body: z.object({ value: z.boolean() }),
+      response: { 204: z.null(), 401: AdminErrorSchema, 403: AdminErrorSchema, 404: AdminErrorSchema },
+    },
+  }, ctrl.setSuperAdmin.bind(ctrl));
+
   /** Synchronise les rôles Discord de l'utilisateur avec ses rôles internes. */
   server.post('/:userId/sync-discord', {
     schema: {

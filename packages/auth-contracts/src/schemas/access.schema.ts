@@ -6,6 +6,7 @@ export const AccessUserSchema = z.object({
   discordUserId: DiscordSnowflakeSchema,
   username: z.string(),
   avatarUrl: z.string().nullish(),
+  isSuperAdmin: z.boolean().default(false),
 });
 
 export const AccessMeResponseSchema = z.object({

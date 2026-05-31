@@ -49,6 +49,7 @@ export class AccessController {
         discordUserId: account?.accountId ?? '',
         username: user.name,
         avatarUrl: user.image ?? undefined,
+        isSuperAdmin: user.isSuperAdmin ?? false,
       },
       appRoles,
       permissions,

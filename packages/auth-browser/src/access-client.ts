@@ -20,9 +20,10 @@ export function createAccessClient(baseUrl: string) {
 
   function hasPermission(
     access: AccessMeResponse | null,
-    permission: Permission | null,
+    permission: Permission | undefined,
   ): boolean {
     if (!permission) return true;
+    if (access?.user.isSuperAdmin) return true;
     return access?.permissions.includes(permission) ?? false;
   }
 

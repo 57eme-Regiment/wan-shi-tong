@@ -46,6 +46,19 @@ export class AdminUserController {
   }
 
   /**
+   * Active ou désactive le statut super admin d'un utilisateur (204 sans corps).
+   * @throws {AppError} 404 si l'utilisateur est introuvable.
+   */
+  async setSuperAdmin(
+    request: FastifyRequest<{ Params: { userId: string }; Body: { value: boolean } }>,
+    reply: FastifyReply,
+  ) {
+    await this.guard.authorize(request, PERMISSIONS.ADMIN_USERS_MANAGE);
+    await this.service.setSuperAdmin(request.params.userId, request.body.value);
+    return reply.code(204).send();
+  }
+
+  /**
    * Synchronise les rôles Discord d'un utilisateur depuis le serveur configuré (204 sans corps).
    * @throws {AppError} 404 si l'utilisateur est introuvable.
    */
