@@ -27,5 +27,6 @@ export function useAccess(): {
 export function useHasPermission(permission?: Permission): boolean {
   if (!permission) return true;
   const { access } = useAccess();
+  if (access?.user.isSuperAdmin) return true;
   return getConfig().accessClient.hasPermission(access, permission);
 }
