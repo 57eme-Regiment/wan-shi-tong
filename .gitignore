@@ -1,0 +1,5 @@
+node_modules/
+*.tsbuildinfo
+
+# dist/ is intentionally NOT ignored
+# Nabu is used via git subtree — consuming repos need pre-built dist/

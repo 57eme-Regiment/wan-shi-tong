@@ -1,0 +1,1 @@
+{"version":3,"file":"prisma-error-map.d.ts","sourceRoot":"","sources":["../src/prisma-error-map.ts"],"names":[],"mappings":"AAAA,eAAO,MAAM,gBAAgB,EAAE,MAAM,CACnC,MAAM,EACN;IAAE,MAAM,EAAE,MAAM,CAAC;IAAC,KAAK,EAAE,MAAM,CAAC;IAAC,OAAO,EAAE,MAAM,CAAA;CAAE,CAKnD,CAAC"}
