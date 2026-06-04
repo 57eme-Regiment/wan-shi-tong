@@ -1,7 +1,7 @@
 import { Database } from '@/infrastructure/database';
 import { DiscordRoleSyncRepository } from '@/services/discord/discord-role-sync.repository';
 import { DiscordRoleSyncService } from '@/services/discord/discordRoleSync.service';
-import { AppError } from '@/shared/errors/appError';
+import { AppError } from '@57eme-regiment/nabu-errors';
 import {
   assertDisabled,
   assertEnabled,

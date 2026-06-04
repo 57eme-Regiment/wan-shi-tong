@@ -1,5 +1,5 @@
 import type { Database } from '@/infrastructure/database';
-import { AppError } from '@/shared/errors/appError';
+import { AppError } from '@57eme-regiment/nabu-errors';
 
 type UserWithDisabled = { disabledAt: Date | null };
 

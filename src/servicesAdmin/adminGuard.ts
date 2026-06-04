@@ -2,7 +2,7 @@ import { env } from '@/config/env';
 import { Database } from '@/infrastructure/database';
 import { auth } from '@/lib/auth/betterAuth';
 import { PermissionResolverService } from '@/services/permission/permissionResolver.service';
-import { AppError } from '@/shared/errors/appError';
+import { AppError } from '@57eme-regiment/nabu-errors';
 import { assertEnabled, findUserOrThrow } from '@/shared/helpers/userHelper';
 import type { Permission } from '@57eme-regiment/auth-contracts';
 import { fromNodeHeaders } from 'better-auth/node';

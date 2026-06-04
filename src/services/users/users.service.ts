@@ -1,4 +1,4 @@
-import { AppError } from '@/shared/errors/appError';
+import { AppError } from '@57eme-regiment/nabu-errors';
 import { User } from '@57eme-regiment/auth-contracts/schemas/user.schema';
 import { injectable } from 'tsyringe';
 import { UsersRepository } from './users.repository';

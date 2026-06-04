@@ -1,5 +1,5 @@
 import { env } from '@/config/env';
-import { errorHandler } from '@/shared/errors/errorHandler';
+import { createErrorHandler } from '@57eme-regiment/nabu-errors';
 import cors from '@fastify/cors';
 import fastifySwagger from '@fastify/swagger';
 import {
@@ -41,7 +41,7 @@ export function buildApp() {
 
   app.setValidatorCompiler(validatorCompiler);
   app.setSerializerCompiler(serializerCompiler);
-  app.setErrorHandler(errorHandler);
+  app.setErrorHandler(createErrorHandler(logger));
 
   if (env.ALLOWED_HOST) {
     app.addHook('onRequest', (request, reply, done) => {

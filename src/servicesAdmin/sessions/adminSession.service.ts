@@ -1,5 +1,5 @@
 import { Database } from '@/infrastructure/database';
-import { AppError } from '@/shared/errors/appError';
+import { AppError } from '@57eme-regiment/nabu-errors';
 import { injectable } from 'tsyringe';
 
 /** Logique métier pour l'administration des sessions utilisateurs actives. */

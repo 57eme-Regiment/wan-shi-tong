@@ -1,5 +1,5 @@
 import { container } from '@/infrastructure/container';
-import { declareRoute } from '@/shared/utils/declareRoute';
+import { declareRoute } from '@57eme-regiment/nabu-fastify';
 import { adminSessionsContract } from '@57eme-regiment/auth-contracts';
 import { ZodTypeProvider } from '@fastify/type-provider-zod';
 import type { FastifyInstance } from 'fastify';
