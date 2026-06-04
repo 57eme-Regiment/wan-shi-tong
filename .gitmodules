@@ -1,0 +1,3 @@
+[submodule "vendor/nabu"]
+	path = vendor/nabu
+	url = https://github.com/57eme-Regiment/nabu.git
