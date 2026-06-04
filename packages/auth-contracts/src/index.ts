@@ -7,6 +7,7 @@ import { adminRoleContract } from './contracts/adminRoles.contract';
 import { adminSessionsContract } from './contracts/adminSessions.contract';
 import { adminUsersContract } from './contracts/adminUsers.contract';
 import { authorizeContract } from './contracts/authorize.contract';
+import { UsersContract } from './contracts/user.contract';
 
 // Contracts (ts-rest)
 export { accessContract } from './contracts/access.contract';
@@ -14,6 +15,7 @@ export { authorizeContract } from './contracts/authorize.contract';
 
 // Admin schemas
 export {
+  AddRolePermissionSchema,
   AdminDiscordMappingSchema,
   AdminErrorSchema,
   AdminOverrideSchema,
@@ -26,16 +28,15 @@ export {
   CreatePermissionSchema,
   CreateRoleSchema,
   DeletePermissionSchema,
-  UpdatePermissionSchema,
   DisableUserSchema,
   MappingParamsSchema,
   OverrideDeleteParamsSchema,
   OverrideUserParamsSchema,
-  AddRolePermissionSchema,
   RoleParamsSchema,
   RolePermissionItemSchema,
   RolePermissionParamsSchema,
   SessionParamsSchema,
+  UpdatePermissionSchema,
   UpdateRoleSchema,
   UserParamsSchema,
 } from './schemas/admin.schema';
@@ -107,4 +108,7 @@ export const adminContract = c.router({
   adminOverrides: adminOverridesContract,
   adminUsers: adminUsersContract,
   authorize: authorizeContract,
+});
+export const contract = c.router({
+  users: UsersContract,
 });

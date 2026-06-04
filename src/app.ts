@@ -1,15 +1,19 @@
 import { env } from '@/config/env';
 import { errorHandler } from '@/shared/errors/errorHandler';
 import cors from '@fastify/cors';
+import fastifySwagger from '@fastify/swagger';
 import {
+  createJsonSchemaTransform,
   serializerCompiler,
   validatorCompiler,
 } from '@fastify/type-provider-zod';
+import apiReference from '@scalar/fastify-api-reference';
 import Fastify from 'fastify';
 import { authorizeRoutes } from './authorize/authorize.routes';
 import { logger } from './config/logger';
 import { authRoutes } from './lib/auth/betterAuth.route';
 import { accessRoutes } from './services/access/access.routes';
+import { UsersRoutes } from './services/users/users.route';
 import { adminRoutes } from './servicesAdmin/admin.routes';
 
 export function buildApp() {
@@ -51,14 +55,51 @@ export function buildApp() {
     });
   }
 
+  if (env.NODE_ENV !== 'production') {
+    const baseTransform = createJsonSchemaTransform({});
+    app.register(fastifySwagger, {
+      openapi: {
+        info: { title: 'WanShiTong API', version: '1.0.0' },
+      },
+      transform: document => {
+        try {
+          return baseTransform(document);
+        } catch (err) {
+          logger.warn(
+            `[swagger] transform failed for ${document.url} — schema hidden. ${err}`,
+          );
+          return { schema: { hide: true }, url: document.url };
+        }
+      },
+    });
+    app.register(apiReference, {
+      routePrefix: '/docs',
+      configuration: {
+        hideClientButton: true,
+        hideDarkModeToggle: true,
+        hiddenClients: true,
+        metaData: {
+          title: 'WanShiTong API docs',
+        },
+        operationTitleSource: 'summary',
+        persistAuth: true,
+      },
+    });
+  }
+
   app.get('/health', async () => ({
     status: 'ok',
     timestamp: new Date().toISOString(),
   }));
+  app.register(UsersRoutes);
   app.register(authRoutes);
   app.register(accessRoutes, { prefix: '/access' });
   app.register(adminRoutes, { prefix: '/admin' });
   app.register(authorizeRoutes, { prefix: '/authorize' });
+
+  app.get('/openapi.json', async (req, res) => {
+    return app.swagger();
+  });
 
   return app;
 }
