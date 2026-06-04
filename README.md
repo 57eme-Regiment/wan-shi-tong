@@ -138,6 +138,50 @@ Toute requête dont le header `Host` ne correspond pas reçoit un `404`. Laisser
 
 ---
 
+## Architecture des routes
+
+Les routes sont définies par contrat (ts-rest) dans le package `packages/auth-contracts`. Chaque endpoint est décrit une seule fois dans le contrat (méthode HTTP, chemin, body, params, réponses, summary).
+
+### Pattern `declareRoute`
+
+Les fichiers `*.routes.ts` n'utilisent **jamais** `server.get/post/put/delete` directement. Ils passent par l'utilitaire `declareRoute` qui extrait automatiquement la méthode, le chemin et les schémas Zod depuis le contrat :
+
+```typescript
+// ✅ correct
+declareRoute(server, adminRoleContract.createRole, ctrl.create.bind(ctrl));
+
+// ❌ à ne pas faire
+server.post('/admin/roles', { schema: { body: CreateRoleSchema, ... } }, ctrl.create.bind(ctrl));
+```
+
+### Chemins absolus dans les contrats
+
+Tous les contrats définissent des **chemins absolus** (ex. `/admin/roles`, `/access/me`). Les fichiers de route sont donc enregistrés **sans préfixe** dans `app.ts` et `admin.routes.ts`. Ajouter un préfixe doublerait le chemin.
+
+### Ajouter un nouvel endpoint
+
+1. Déclarer l'endpoint dans le fichier contrat correspondant dans `packages/auth-contracts/src/contracts/`
+2. Ajouter `declareRoute(server, contract.monEndpoint, ctrl.maMethode.bind(ctrl))` dans le fichier route correspondant
+3. Implémenter la méthode dans le contrôleur
+
+### Structure des fichiers
+
+```
+packages/auth-contracts/src/
+├── contracts/          ← source unique de vérité (méthode, path, schemas)
+├── schemas/            ← schémas Zod partagés
+└── index.ts            ← exports publics du package
+
+src/
+├── services/           ← routes publiques (access, users)
+├── servicesAdmin/      ← routes admin (roles, permissions, users, sessions…)
+│   └── admin.routes.ts ← agrège les sous-routeurs admin
+├── authorize/          ← route d'autorisation inter-services
+└── lib/auth/           ← routes Better Auth (gestion native)
+```
+
+---
+
 ## Tester avec Bruno
 
 Les routes Better Auth sont exposées sous le préfixe `/api/auth` (défaut Better Auth).

@@ -12,6 +12,13 @@ import { UsersContract } from './contracts/user.contract';
 // Contracts (ts-rest)
 export { accessContract } from './contracts/access.contract';
 export { authorizeContract } from './contracts/authorize.contract';
+export { adminDiscordMappingContract } from './contracts/adminDiscordMapping.contract';
+export { adminOverridesContract } from './contracts/adminOverrides.contract';
+export { adminPermisisionsContract } from './contracts/adminPermisisions.contract';
+export { adminRoleContract } from './contracts/adminRoles.contract';
+export { adminSessionsContract } from './contracts/adminSessions.contract';
+export { adminUsersContract } from './contracts/adminUsers.contract';
+export { UsersContract } from './contracts/user.contract';
 
 // Admin schemas
 export {

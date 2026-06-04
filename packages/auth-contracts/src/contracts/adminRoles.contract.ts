@@ -14,7 +14,6 @@ import {
 const c = initContract();
 
 export const adminRoleContract = c.router({
-  // Roles
   getRoles: {
     method: 'GET',
     path: '/admin/roles',
@@ -24,6 +23,10 @@ export const adminRoleContract = c.router({
       403: AdminErrorSchema,
     },
     summary: 'Lister les rôles applicatifs',
+    description:
+      'Retourne la liste de tous les rôles applicatifs triés par date de création. ' +
+      'Requiert la permission `ADMIN_ROLES_READ`.',
+    metadata: { tags: ['Admin - Rôles'] },
   },
   createRole: {
     method: 'POST',
@@ -35,6 +38,10 @@ export const adminRoleContract = c.router({
       403: AdminErrorSchema,
     },
     summary: 'Créer un rôle applicatif',
+    description:
+      'Crée un nouveau rôle identifié par une clé unique. ' +
+      'Requiert la permission `ADMIN_ROLES_MANAGE`.',
+    metadata: { tags: ['Admin - Rôles'] },
   },
   updateRole: {
     method: 'PUT',
@@ -48,6 +55,11 @@ export const adminRoleContract = c.router({
       404: AdminErrorSchema,
     },
     summary: 'Modifier un rôle applicatif',
+    description:
+      'Met à jour les champs (clé, nom, description) du rôle. ' +
+      "Invalide tous les snapshots d'accès utilisateurs afin que les permissions soient recalculées. " +
+      'Requiert la permission `ADMIN_ROLES_MANAGE`.',
+    metadata: { tags: ['Admin - Rôles'] },
   },
   deleteRole: {
     method: 'DELETE',
@@ -61,9 +73,11 @@ export const adminRoleContract = c.router({
       404: AdminErrorSchema,
     },
     summary: 'Supprimer un rôle applicatif',
+    description:
+      'Supprime le rôle et invalide tous les snapshots dans une transaction. ' +
+      'Requiert la permission `ADMIN_ROLES_MANAGE`.',
+    metadata: { tags: ['Admin - Rôles'] },
   },
-
-  // Gestion des permissions d'un rôle
   getRolePermissions: {
     method: 'GET',
     path: '/admin/roles/:roleId/permissions',
@@ -74,7 +88,11 @@ export const adminRoleContract = c.router({
       403: AdminErrorSchema,
       404: AdminErrorSchema,
     },
-    summary: 'Lister les permissions d\'un rôle',
+    summary: "Lister les permissions d'un rôle",
+    description:
+      'Retourne les permissions (id, clé, description) assignées à un rôle. ' +
+      'Requiert la permission `ADMIN_ROLES_READ`.',
+    metadata: { tags: ['Admin - Rôles'] },
   },
   addRolePermission: {
     method: 'POST',
@@ -89,6 +107,10 @@ export const adminRoleContract = c.router({
       409: AdminErrorSchema,
     },
     summary: 'Ajouter une permission à un rôle',
+    description:
+      'Associe une permission existante à un rôle et invalide les snapshots. ' +
+      'Retourne 409 si la permission est déjà assignée. Requiert `ADMIN_ROLES_MANAGE`.',
+    metadata: { tags: ['Admin - Rôles'] },
   },
   removeRolePermission: {
     method: 'DELETE',
@@ -101,6 +123,10 @@ export const adminRoleContract = c.router({
       403: AdminErrorSchema,
       404: AdminErrorSchema,
     },
-    summary: 'Retirer une permission d\'un rôle',
+    summary: "Retirer une permission d'un rôle",
+    description:
+      "Dissocie la permission du rôle et invalide les snapshots dans une transaction. " +
+      'Retourne 404 si le lien est introuvable. Requiert `ADMIN_ROLES_MANAGE`.',
+    metadata: { tags: ['Admin - Rôles'] },
   },
 });

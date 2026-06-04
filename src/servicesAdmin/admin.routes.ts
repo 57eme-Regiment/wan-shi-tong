@@ -17,10 +17,10 @@ import { adminUserRoutes } from './users/adminUser.routes';
  *   - /sessions        → gestion des sessions actives
  */
 export async function adminRoutes(app: FastifyInstance) {
-  app.register(adminRoleRoutes, { prefix: '/roles' });
-  app.register(adminPermissionRoutes, { prefix: '/permissions' });
-  app.register(adminDiscordMappingRoutes, { prefix: '/discord-mappings' });
-  app.register(adminOverrideRoutes, { prefix: '/overrides' });
-  app.register(adminUserRoutes, { prefix: '/users' });
-  app.register(adminSessionRoutes, { prefix: '/sessions' });
+  app.register(adminRoleRoutes);
+  app.register(adminPermissionRoutes);
+  app.register(adminDiscordMappingRoutes);
+  app.register(adminOverrideRoutes);
+  app.register(adminUserRoutes);
+  app.register(adminSessionRoutes);
 }

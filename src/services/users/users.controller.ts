@@ -3,14 +3,14 @@ import type { FastifyReply, FastifyRequest } from 'fastify';
 import { injectable } from 'tsyringe';
 import { UsersService } from './users.service';
 
-/** Contrôleur HTTP pour les opérations CRUD sur les inventaires. */
+/** Contrôleur HTTP pour la consultation des comptes utilisateurs. */
 @injectable()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   /**
-   * Retourne un inventaire par son id.
-   * @throws {AppError} 404 si l'inventaire est introuvable.
+   * Retourne un utilisateur par son id.
+   * @throws {AppError} 404 si l'utilisateur est introuvable.
    */
   async getById(
     req: FastifyRequest<{ Params: UserParams }>,

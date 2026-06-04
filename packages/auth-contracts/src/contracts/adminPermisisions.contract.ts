@@ -11,7 +11,6 @@ import {
 const c = initContract();
 
 export const adminPermisisionsContract = c.router({
-  // Permissions
   getPermissions: {
     method: 'GET',
     path: '/admin/permissions',
@@ -20,19 +19,27 @@ export const adminPermisisionsContract = c.router({
       401: AdminErrorSchema,
       403: AdminErrorSchema,
     },
-    summary: 'Lister les permissions',
+    summary: 'Lister les permissions applicatives',
+    description:
+      'Retourne la liste de toutes les permissions disponibles dans le système, triées par clé. ' +
+      'Requiert la permission `ADMIN_PERMISSIONS_READ`.',
+    metadata: { tags: ['Admin - Permissions'] },
   },
   createPermissions: {
     method: 'POST',
     path: '/admin/permissions',
     body: CreatePermissionSchema,
     responses: {
-      200: z.array(AdminPermissionSchema),
+      201: AdminPermissionSchema.array(),
       401: AdminErrorSchema,
       403: AdminErrorSchema,
       409: AdminErrorSchema,
     },
-    summary: 'Crée une nouvelle permission',
+    summary: 'Créer une nouvelle permission',
+    description:
+      'Crée une nouvelle permission applicative identifiée par une clé unique. ' +
+      'Retourne 409 si une permission avec cette clé existe déjà. Requiert `ADMIN_PERMISSIONS_MANAGE`.',
+    metadata: { tags: ['Admin - Permissions'] },
   },
   updatePermission: {
     method: 'PUT',
@@ -45,7 +52,11 @@ export const adminPermisisionsContract = c.router({
       403: AdminErrorSchema,
       404: AdminErrorSchema,
     },
-    summary: 'Met à jour une permission',
+    summary: 'Modifier une permission',
+    description:
+      'Met à jour la clé ou la description de la permission. ' +
+      'Requiert la permission `ADMIN_PERMISSIONS_MANAGE`.',
+    metadata: { tags: ['Admin - Permissions'] },
   },
   deletePermissions: {
     method: 'DELETE',
@@ -58,6 +69,10 @@ export const adminPermisisionsContract = c.router({
       403: AdminErrorSchema,
       404: AdminErrorSchema,
     },
-    summary: 'Supprime une permission',
+    summary: 'Supprimer une permission',
+    description:
+      'Supprime la permission et invalide tous les snapshots dans une transaction ' +
+      '(les rôles peuvent en dépendre). Requiert `ADMIN_PERMISSIONS_MANAGE`.',
+    metadata: { tags: ['Admin - Permissions'] },
   },
 });

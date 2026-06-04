@@ -93,9 +93,9 @@ export function buildApp() {
   }));
   app.register(UsersRoutes);
   app.register(authRoutes);
-  app.register(accessRoutes, { prefix: '/access' });
-  app.register(adminRoutes, { prefix: '/admin' });
-  app.register(authorizeRoutes, { prefix: '/authorize' });
+  app.register(accessRoutes);
+  app.register(adminRoutes);
+  app.register(authorizeRoutes);
 
   app.get('/openapi.json', async (req, res) => {
     return app.swagger();

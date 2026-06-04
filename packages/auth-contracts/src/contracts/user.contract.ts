@@ -10,10 +10,11 @@ export const UsersContract = c.router(
       method: 'GET',
       path: '/:userId',
       pathParams: UserParamsSchema,
-      summary: 'Récupère un user par son ID',
+      summary: 'Récupère un utilisateur par son ID',
       description:
-        'Retourne les information de base concernant un utilisateur par son id ',
-      metadata: { tags: ['Users'] },
+        'Retourne les informations publiques de base (id, nom, avatar, statut) ' +
+        "d'un utilisateur identifié par son UUID interne.",
+      metadata: { tags: ['Utilisateurs'] },
       responses: {
         200: UserSchema,
         401: ErrorSchema,
