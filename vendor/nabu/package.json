@@ -1,0 +1,8 @@
+{
+  "name": "@57eme-regiment/nabu",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev"
+  }
+}
