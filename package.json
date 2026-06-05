@@ -16,9 +16,9 @@
   "packageManager": "pnpm@11.1.2",
   "dependencies": {
     "@57eme-regiment/auth-contracts": "workspace:*",
-    "@57eme-regiment/nabu-errors": "portal:./nabu/packages/errors",
-    "@57eme-regiment/nabu-fastify": "portal:./nabu/packages/fastify",
-    "@57eme-regiment/nabu-logger": "portal:./nabu/packages/logger",
+    "@57eme-regiment/nabu-errors": "link:../wan-shi-tong/nabu/packages/errors",
+    "@57eme-regiment/nabu-fastify": "link:../wan-shi-tong/nabu/packages/fastify",
+    "@57eme-regiment/nabu-logger": "link:../wan-shi-tong/nabu/packages/logger",
     "@fastify/cors": "^11.2.0",
     "@fastify/swagger": "^9.7.0",
     "@fastify/type-provider-zod": "^1.0.0",

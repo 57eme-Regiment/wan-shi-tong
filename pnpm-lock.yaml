@@ -11,6 +11,15 @@ importers:
       '@57eme-regiment/auth-contracts':
         specifier: workspace:*
         version: link:packages/auth-contracts
+      '@57eme-regiment/nabu-errors':
+        specifier: link:../wan-shi-tong/nabu/packages/errors
+        version: link:nabu/packages/errors
+      '@57eme-regiment/nabu-fastify':
+        specifier: link:../wan-shi-tong/nabu/packages/fastify
+        version: link:nabu/packages/fastify
+      '@57eme-regiment/nabu-logger':
+        specifier: link:../wan-shi-tong/nabu/packages/logger
+        version: link:nabu/packages/logger
       '@fastify/cors':
         specifier: ^11.2.0
         version: 11.2.0
