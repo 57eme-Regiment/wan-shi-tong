@@ -15,12 +15,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@57eme-regiment/auth-contracts": [
-        "packages/auth-contracts/src/index.ts"
-      ],
-      "@57eme-regiment/auth-contracts/*": [
-        "packages/auth-contracts/src/*"
-      ]
+      "@57eme-regiment/auth-contracts": ["packages/auth-contracts/src/index.ts"],
+      "@57eme-regiment/auth-contracts/*": ["packages/auth-contracts/src/*"],
+      "@57eme-regiment/nabu-errors": ["nabu/packages/errors/src/index.ts"],
+      "@57eme-regiment/nabu-fastify": ["nabu/packages/fastify/src/index.ts"],
+      "@57eme-regiment/nabu-logger": ["nabu/packages/logger/src/index.ts"]
     }
   },
   "include": ["src/**/*", "packages/auth-contracts/src/**/*"],

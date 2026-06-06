@@ -155,7 +155,7 @@ export const AdminUserSchema = z.object({
   isSuperAdmin: z.boolean().default(false),
   sessions: AdminSessionSchema.array().nullish(),
 });
-export const UserParamsSchema = z.object({ userId: z.string() });
+export const AdminUserParamsSchema = z.object({ userId: z.string() });
 export const DisableUserSchema = z.object({ reason: z.string().optional() });
 
 export type AdminSession = z.infer<typeof AdminSessionSchema>;

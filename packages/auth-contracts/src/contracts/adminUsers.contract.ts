@@ -2,9 +2,9 @@ import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 import {
   AdminErrorSchema,
+  AdminUserParamsSchema,
   AdminUserSchema,
   DisableUserSchema,
-  UserParamsSchema,
 } from '../schemas/admin.schema';
 
 const c = initContract();
@@ -27,7 +27,7 @@ export const adminUsersContract = c.router({
   disableUser: {
     method: 'POST',
     path: '/admin/users/:userId/disable',
-    pathParams: UserParamsSchema,
+    pathParams: AdminUserParamsSchema,
     body: DisableUserSchema,
     responses: {
       204: z.null(),
@@ -46,7 +46,7 @@ export const adminUsersContract = c.router({
   enableUser: {
     method: 'POST',
     path: '/admin/users/:userId/enable',
-    pathParams: UserParamsSchema,
+    pathParams: AdminUserParamsSchema,
     body: c.noBody(),
     responses: {
       204: z.null(),
@@ -57,14 +57,14 @@ export const adminUsersContract = c.router({
     },
     summary: 'Réactiver un compte utilisateur',
     description:
-      "Réactive un compte préalablement désactivé. " +
+      'Réactive un compte préalablement désactivé. ' +
       'Retourne 409 si le compte est déjà actif. Requiert `ADMIN_USERS_MANAGE`.',
     metadata: { tags: ['Admin - Utilisateurs'] },
   },
   syncDiscord: {
     method: 'POST',
     path: '/admin/users/:userId/sync-discord',
-    pathParams: UserParamsSchema,
+    pathParams: AdminUserParamsSchema,
     body: c.noBody(),
     responses: {
       204: z.null(),
@@ -82,7 +82,7 @@ export const adminUsersContract = c.router({
   setSuperAdmin: {
     method: 'POST',
     path: '/admin/users/:userId/super-admin',
-    pathParams: UserParamsSchema,
+    pathParams: AdminUserParamsSchema,
     body: z.object({ value: z.boolean() }),
     responses: {
       204: z.null(),
@@ -93,7 +93,7 @@ export const adminUsersContract = c.router({
     summary: "Modifier le statut super admin d'un utilisateur",
     description:
       "Active ou désactive le statut super admin d'un utilisateur. " +
-      "Un super admin passe toutes les vérifications de permission. " +
+      'Un super admin passe toutes les vérifications de permission. ' +
       "Invalide le snapshot d'accès si le statut change. Requiert `ADMIN_USERS_MANAGE`.",
     metadata: { tags: ['Admin - Utilisateurs'] },
   },

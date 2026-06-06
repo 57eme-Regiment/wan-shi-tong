@@ -11,64 +11,23 @@ import { UsersContract } from './contracts/user.contract';
 
 // Contracts (ts-rest)
 export { accessContract } from './contracts/access.contract';
-export { authorizeContract } from './contracts/authorize.contract';
 export { adminDiscordMappingContract } from './contracts/adminDiscordMapping.contract';
 export { adminOverridesContract } from './contracts/adminOverrides.contract';
 export { adminPermisisionsContract } from './contracts/adminPermisisions.contract';
 export { adminRoleContract } from './contracts/adminRoles.contract';
 export { adminSessionsContract } from './contracts/adminSessions.contract';
 export { adminUsersContract } from './contracts/adminUsers.contract';
+export { authorizeContract } from './contracts/authorize.contract';
 export { UsersContract } from './contracts/user.contract';
 
 // Admin schemas
-export {
-  AddRolePermissionSchema,
-  AdminDiscordMappingSchema,
-  AdminErrorSchema,
-  AdminOverrideSchema,
-  AdminPermissionSchema,
-  AdminRoleSchema,
-  AdminSessionSchema,
-  AdminUserSchema,
-  CreateDiscordMappingSchema,
-  CreateOverrideSchema,
-  CreatePermissionSchema,
-  CreateRoleSchema,
-  DeletePermissionSchema,
-  DisableUserSchema,
-  MappingParamsSchema,
-  OverrideDeleteParamsSchema,
-  OverrideUserParamsSchema,
-  RoleParamsSchema,
-  RolePermissionItemSchema,
-  RolePermissionParamsSchema,
-  SessionParamsSchema,
-  UpdatePermissionSchema,
-  UpdateRoleSchema,
-  UserParamsSchema,
-} from './schemas/admin.schema';
-export type {
-  AddRolePermission,
-  AdminDiscordMapping,
-  AdminOverride,
-  AdminPermission,
-  AdminRole,
-  AdminSession,
-  AdminUser,
-  CreateDiscordMapping,
-  CreateOverride,
-  CreatePermission,
-  CreateRole,
-  DeletePermission,
-  RolePermissionItem,
-  UpdatePermission,
-  UpdateRole,
-} from './schemas/admin.schema';
+export * from './schemas/admin.schema';
+export * from './schemas/user.schema';
 
 // Schemas
 export {
   AccessMeResponseSchema,
-  AccessUserSchema,
+  AccessUserSchema
 } from './schemas/access.schema';
 export type { AccessMeResponse, AccessUser } from './schemas/access.schema';
 
@@ -76,13 +35,13 @@ export {
   AuthorizeBodySchema,
   AuthorizeFailSchema,
   AuthorizeResponseSchema,
-  AuthorizeSuccessSchema,
+  AuthorizeSuccessSchema
 } from './schemas/authorize.schema';
 export type {
   AuthorizeBody,
   AuthorizeFail,
   AuthorizeResponse,
-  AuthorizeSuccess,
+  AuthorizeSuccess
 } from './schemas/authorize.schema';
 
 // Permissions
@@ -95,13 +54,13 @@ export {
   DiscordSnowflakeSchema,
   FailReason,
   FailReasonSchema,
-  MyAccessSchema,
+  MyAccessSchema
 } from './types';
 export type {
   AuthorizedUser,
   DiscordSnowflake,
   FailResponse,
-  MyAccess,
+  MyAccess
 } from './types';
 
 const c = initContract();
