@@ -1,7 +1,7 @@
 {
   "name": "@57eme-regiment/auth-contracts",
-  "version": "1.9.0",
-  "description": "Shared auth types and permission constants for the 57\u00e8me R\u00e9giment ecosystem",
+  "version": "1.10.0",
+  "description": "Shared auth types and permission constants for the 57ème Régiment ecosystem",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
