@@ -9,6 +9,7 @@ export async function adminUserRoutes(app: FastifyInstance) {
   const ctrl = container.resolve(AdminUserController);
   const server = app.withTypeProvider<ZodTypeProvider>();
 
+  declareRoute(server, adminUsersContract.search, ctrl.search.bind(ctrl));
   declareRoute(server, adminUsersContract.getAll, ctrl.getAll.bind(ctrl));
   declareRoute(server, adminUsersContract.disableUser, ctrl.disable.bind(ctrl));
   declareRoute(server, adminUsersContract.enableUser, ctrl.enable.bind(ctrl));

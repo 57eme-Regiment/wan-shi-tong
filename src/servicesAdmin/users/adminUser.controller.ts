@@ -1,5 +1,5 @@
 import { env } from '@/config/env';
-import { PERMISSIONS } from '@57eme-regiment/auth-contracts';
+import { PERMISSIONS, UserQuery } from '@57eme-regiment/auth-contracts';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { injectable } from 'tsyringe';
 import { AdminGuard } from '../adminGuard';
@@ -12,6 +12,15 @@ export class AdminUserController {
     private readonly guard: AdminGuard,
     private readonly service: AdminUserService,
   ) {}
+
+  /** Recherche des utilisateurs par nom ou accountId. */
+  async search(
+    request: FastifyRequest<{ Querystring: UserQuery }>,
+    reply: FastifyReply,
+  ) {
+    await this.guard.authorize(request, PERMISSIONS.ADMIN_USERS_READ);
+    return reply.send(await this.service.search(request.query));
+  }
 
   /** Retourne la liste de tous les utilisateurs avec leurs sessions actives. */
   async getAll(request: FastifyRequest, reply: FastifyReply) {
@@ -56,7 +65,10 @@ export class AdminUserController {
    * @throws {AppError} 404 si l'utilisateur est introuvable.
    */
   async setSuperAdmin(
-    request: FastifyRequest<{ Params: { userId: string }; Body: { value: boolean } }>,
+    request: FastifyRequest<{
+      Params: { userId: string };
+      Body: { value: boolean };
+    }>,
     reply: FastifyReply,
   ) {
     await this.guard.authorize(request, PERMISSIONS.ADMIN_USERS_MANAGE);

@@ -1,12 +1,13 @@
 import { Database } from '@/infrastructure/database';
 import { DiscordRoleSyncRepository } from '@/services/discord/discord-role-sync.repository';
 import { DiscordRoleSyncService } from '@/services/discord/discordRoleSync.service';
-import { AppError } from '@57eme-regiment/nabu-errors';
 import {
   assertDisabled,
   assertEnabled,
   findUserOrThrow,
 } from '@/shared/helpers/userHelper';
+import { UserQuery } from '@57eme-regiment/auth-contracts';
+import { AppError } from '@57eme-regiment/nabu-errors';
 import { injectable } from 'tsyringe';
 
 /** Logique métier pour l'administration des utilisateurs (activation, désactivation, synchronisation Discord). */
@@ -17,6 +18,49 @@ export class AdminUserService {
     private readonly syncRepo: DiscordRoleSyncRepository,
     private readonly syncService: DiscordRoleSyncService,
   ) {}
+
+  /** Recherche des utilisateurs par nom (fuzzy) ou accountId (ILIKE). */
+  async search({ limit, search }: UserQuery) {
+    const take = limit ?? 25;
+
+    if (!search) {
+      return this.db.context.user.findMany({
+        select: {
+          id: true,
+          name: true,
+          image: true,
+          disabledAt: true,
+          disabledReason: true,
+          isSuperAdmin: true,
+        },
+        take,
+        orderBy: { name: 'asc' },
+      });
+    }
+
+    const threshold = 0.1;
+    return this.db.context.$queryRaw<
+      {
+        id: string;
+        name: string;
+        image: string | null;
+        disabledAt: Date | null;
+        disabledReason: string | null;
+        isSuperAdmin: boolean;
+      }[]
+    >`
+      SELECT DISTINCT u.id, u.name, u.image, u."disabledAt", u."disabledReason", u."isSuperAdmin",
+        similarity(u.name, ${search}) AS score
+      FROM "auth"."user" u
+      LEFT JOIN "auth".account a ON a."userId" = u.id
+      WHERE
+        similarity(u.name, ${search}) > ${threshold}
+        OR u.name ILIKE ${'%' + search + '%'}
+        OR a."accountId" ILIKE ${'%' + search + '%'}
+      ORDER BY score DESC
+      LIMIT ${take}
+    `;
+  }
 
   /** Retourne tous les utilisateurs avec leurs sessions actives. */
   getAll() {

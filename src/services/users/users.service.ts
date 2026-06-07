@@ -1,5 +1,5 @@
-import { AppError } from '@57eme-regiment/nabu-errors';
 import { User } from '@57eme-regiment/auth-contracts/schemas/user.schema';
+import { AppError } from '@57eme-regiment/nabu-errors';
 import { injectable } from 'tsyringe';
 import { UsersRepository } from './users.repository';
 
@@ -14,8 +14,7 @@ export class UsersService {
    */
   async getById(id: string): Promise<User> {
     const user = await this.usersRepository.findByIdOrThrow(id);
-    if (!user)
-      throw new AppError('User not found', 404, 'USER_NOT_FOUND');
+    if (!user) throw new AppError('User not found', 404, 'USER_NOT_FOUND');
 
     return user;
   }

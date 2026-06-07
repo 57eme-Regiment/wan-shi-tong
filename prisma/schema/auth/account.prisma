@@ -15,6 +15,7 @@ model Account {
   updatedAt             DateTime  @updatedAt
 
   @@index([userId])
+  @@index([accountId(ops: raw("gin_trgm_ops"))], type: Gin)
   @@map("account")
 
 	@@schema("auth")

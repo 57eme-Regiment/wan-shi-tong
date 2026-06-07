@@ -109,13 +109,13 @@ importers:
 
   packages/auth-contracts:
     dependencies:
+      zod:
+        specifier: '>=3'
+        version: 4.4.3
+    devDependencies:
       '@ts-rest/core':
         specifier: 3.53.0-rc.1
         version: 3.53.0-rc.1(@types/node@22.19.19)
-      zod:
-        specifier: ^4.4.3
-        version: 4.4.3
-    devDependencies:
       typescript:
         specifier: ^5.6.0
         version: 5.9.3

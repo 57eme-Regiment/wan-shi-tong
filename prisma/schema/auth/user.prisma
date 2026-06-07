@@ -15,6 +15,7 @@ model User {
   accounts        Account[]
 
 
+  @@index([name(ops: raw("gin_trgm_ops"))], type: Gin)
 	@@map("user")
   @@schema("auth")
 }
