@@ -3,8 +3,8 @@ import { container } from '@/infrastructure/container';
 import { Database } from '@/infrastructure/database';
 import { sec } from '@/lib/ms/msHelper';
 import { DiscordRoleSyncService } from '@/services/discord/discordRoleSync.service';
+import { drizzleAdapter } from '@better-auth/drizzle-adapter';
 import { betterAuth } from 'better-auth';
-import { prismaAdapter } from 'better-auth/adapters/prisma';
 
 const db = new Database();
 const { context } = db;
@@ -17,9 +17,10 @@ export const auth = betterAuth({
     crossSubDomainCookies: env.COOKIE_DOMAIN
       ? { enabled: true, domain: env.COOKIE_DOMAIN }
       : { enabled: false },
+    database: { generateId: 'uuid' },
   },
-  database: prismaAdapter(context, {
-    provider: 'postgresql',
+  database: drizzleAdapter(context, {
+    provider: 'pg',
   }),
   user: {
     additionalFields: {
@@ -60,9 +61,13 @@ export const auth = betterAuth({
     session: {
       create: {
         after: async session => {
-          const account = await context.account.findFirst({
-            where: { userId: session.userId, providerId: 'discord' },
-            select: { accessToken: true },
+          const account = await context.query.account.findFirst({
+            where: (a, { and, eq }) =>
+              and(
+                eq(a.userId, session.userId),
+                eq(a.providerId, 'discord'),
+              ),
+            columns: { accessToken: true },
           });
 
           if (!account?.accessToken) return;

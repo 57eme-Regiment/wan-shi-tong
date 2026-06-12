@@ -30,9 +30,10 @@ export class AccessController {
 
     const [user, account] = await Promise.all([
       findUserOrThrow(this.db, session.user.id),
-      this.db.context.account.findFirst({
-        where: { userId: session.user.id, providerId: 'discord' },
-        select: { accountId: true },
+      this.db.context.query.account.findFirst({
+        where: (a, { and, eq }) =>
+          and(eq(a.userId, session.user.id), eq(a.providerId, 'discord')),
+        columns: { accountId: true },
       }),
     ]);
 

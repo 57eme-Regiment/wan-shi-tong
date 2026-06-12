@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1781203038377,
+      "tag": "0000_setupAndMigrateFromPrisma",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1781285544277,
+      "tag": "0001_addUUIDDefaults",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1781287469766,
+      "tag": "0002_textToUUID",
+      "breakpoints": true
+    }
+  ]
+}
