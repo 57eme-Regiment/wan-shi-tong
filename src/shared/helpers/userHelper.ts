@@ -5,7 +5,9 @@ type UserWithDisabled = { disabledAt: Date | null };
 
 /** Charge l'utilisateur ou lève une AppError 404. */
 export async function findUserOrThrow(db: Database, userId: string) {
-  const user = await db.context.user.findUnique({ where: { id: userId } });
+  const user = await db.context.query.user.findFirst({
+    where: (u, { eq }) => eq(u.id, userId),
+  });
   if (!user) throw new AppError('User not found', 404, 'USER_NOT_FOUND');
   return user;
 }

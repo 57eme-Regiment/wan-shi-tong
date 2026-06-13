@@ -1,50 +1,60 @@
-import { OverrideEffect } from '@/generated/enums';
+import * as schema from '@/../drizzle/schema';
 import { Database } from '@/infrastructure/database';
+import { and, eq } from 'drizzle-orm';
 import { injectable } from 'tsyringe';
 
-/** Accès aux données Prisma pour le modèle UserPermissionOverride (administration). */
 @injectable()
 export class AdminOverrideRepository {
   constructor(private readonly db: Database) {}
 
-  /** Retourne tous les overrides de permissions d'un utilisateur, avec la clé de permission associée. */
   findByUser(userId: string) {
-    return this.db.context.userPermissionOverride.findMany({
-      where: { userId },
-      include: { permission: { select: { key: true } } },
-      orderBy: { createdAt: 'asc' },
+    return this.db.context.query.userPermissionOverride.findMany({
+      where: (o, { eq }) => eq(o.userId, userId),
+      orderBy: (o, { asc }) => [asc(o.createdAt)],
+      with: {
+        permission: { columns: { key: true } },
+      },
     });
   }
 
-  /** Retourne l'override d'une permission spécifique pour un utilisateur, ou `null` s'il n'existe pas. */
   findByKey(userId: string, permissionId: string) {
-    return this.db.context.userPermissionOverride.findUnique({
-      where: { userId_permissionId: { userId, permissionId } },
+    return this.db.context.query.userPermissionOverride.findFirst({
+      where: (o, { and, eq }) =>
+        and(eq(o.userId, userId), eq(o.permissionId, permissionId)),
     });
   }
 
-  /**
-   * Crée ou met à jour l'override d'une permission pour un utilisateur.
-   * Retourne l'override avec la clé de permission associée.
-   */
-  upsert(data: { userId: string; permissionId: string; effect: 'allow' | 'deny'; reason?: string }) {
-    return this.db.context.userPermissionOverride.upsert({
-      where: { userId_permissionId: { userId: data.userId, permissionId: data.permissionId } },
-      update: { effect: data.effect as OverrideEffect, reason: data.reason ?? null },
-      create: {
+  async upsert(data: { userId: string; permissionId: string; effect: 'allow' | 'deny'; reason?: string }) {
+    const [result] = await this.db.context
+      .insert(schema.userPermissionOverride)
+      .values({
         userId: data.userId,
         permissionId: data.permissionId,
-        effect: data.effect as OverrideEffect,
+        effect: data.effect,
         reason: data.reason ?? null,
+      })
+      .onConflictDoUpdate({
+        target: [schema.userPermissionOverride.userId, schema.userPermissionOverride.permissionId],
+        set: { effect: data.effect, reason: data.reason ?? null },
+      })
+      .returning();
+
+    return this.db.context.query.userPermissionOverride.findFirst({
+      where: (o, { eq }) => eq(o.id, result.id),
+      with: {
+        permission: { columns: { key: true } },
       },
-      include: { permission: { select: { key: true } } },
     });
   }
 
-  /** Supprime l'override d'une permission pour un utilisateur donné. */
-  delete(userId: string, permissionId: string) {
-    return this.db.context.userPermissionOverride.delete({
-      where: { userId_permissionId: { userId, permissionId } },
-    });
+  async delete(userId: string, permissionId: string) {
+    await this.db.context
+      .delete(schema.userPermissionOverride)
+      .where(
+        and(
+          eq(schema.userPermissionOverride.userId, userId),
+          eq(schema.userPermissionOverride.permissionId, permissionId),
+        ),
+      );
   }
 }

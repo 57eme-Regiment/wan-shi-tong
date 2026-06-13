@@ -32,10 +32,13 @@ export class AuthorizeController {
     }
 
     const [user, account] = await Promise.all([
-      this.db.context.user.findUnique({ where: { id: session.user.id } }),
-      this.db.context.account.findFirst({
-        where: { userId: session.user.id, providerId: 'discord' },
-        select: { accountId: true },
+      this.db.context.query.user.findFirst({
+        where: (u, { eq }) => eq(u.id, session.user.id),
+      }),
+      this.db.context.query.account.findFirst({
+        where: (a, { and, eq }) =>
+          and(eq(a.userId, session.user.id), eq(a.providerId, 'discord')),
+        columns: { accountId: true },
       }),
     ]);
 

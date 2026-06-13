@@ -7,11 +7,10 @@ import { injectable } from 'tsyringe';
 export class UsersRepository {
   constructor(private readonly db: Database) {}
 
-  /** Retourne un utilisateur par son id, ou lève une erreur s'il est introuvable. */
-  findByIdOrThrow(id: string): Promise<User | null> {
-    return this.db.context.user.findUniqueOrThrow({
-      where: { id },
-      select: {
+  async findByIdOrThrow(id: string): Promise<User | null> {
+    const user = await this.db.context.query.user.findFirst({
+      where: (u, { eq }) => eq(u.id, id),
+      columns: {
         id: true,
         name: true,
         image: true,
@@ -20,5 +19,7 @@ export class UsersRepository {
         isSuperAdmin: true,
       },
     });
+    if (!user) throw new Error(`User ${id} not found`);
+    return user;
   }
 }
