@@ -6,7 +6,7 @@ import { user } from './user';
 export const account = auth.table(
   'account',
   {
-    id: uuid().primaryKey().notNull(),
+    id: uuid().primaryKey().notNull().defaultRandom(),
     accountId: text().notNull(),
     providerId: text().notNull(),
     userId: uuid().notNull(),

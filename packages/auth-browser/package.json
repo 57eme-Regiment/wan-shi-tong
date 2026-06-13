@@ -2,6 +2,7 @@
   "name": "@57eme-regiment/auth-browser",
   "version": "1.9.0",
   "description": "React hooks and fetch clients for WanShiTong auth",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

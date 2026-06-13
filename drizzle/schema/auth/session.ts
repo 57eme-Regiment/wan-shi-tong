@@ -13,7 +13,7 @@ import { user } from './user';
 export const session = auth.table(
   'session',
   {
-    id: uuid().primaryKey().notNull(),
+    id: uuid().primaryKey().notNull().defaultRandom(),
     expiresAt: timestamp({ precision: 3, mode: 'date' }).notNull(),
     token: text().notNull(),
     createdAt: timestamp({ precision: 3, mode: 'date' }).defaultNow().notNull(),
