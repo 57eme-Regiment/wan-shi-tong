@@ -1,33 +1,42 @@
+import * as schema from '@/../drizzle/schema';
 import { Database } from '@/infrastructure/database';
+import { eq } from 'drizzle-orm';
 import { injectable } from 'tsyringe';
 
-/** Accès aux données Prisma pour le modèle Role (administration). */
 @injectable()
 export class AdminRoleRepository {
   constructor(private readonly db: Database) {}
 
-  /** Retourne tous les rôles triés par date de création. */
   findAll() {
-    return this.db.context.role.findMany({ orderBy: { createdAt: 'asc' } });
+    return this.db.context.query.role.findMany({
+      orderBy: (r, { asc }) => [asc(r.createdAt)],
+    });
   }
 
-  /** Retourne un rôle par son id, ou `null` s'il est introuvable. */
   findById(id: string) {
-    return this.db.context.role.findUnique({ where: { id } });
+    return this.db.context.query.role.findFirst({
+      where: (r, { eq }) => eq(r.id, id),
+    });
   }
 
-  /** Crée un nouveau rôle avec la clé, le nom et la description optionnelle fournis. */
-  create(data: { key: string; name: string; description?: string }) {
-    return this.db.context.role.create({ data });
+  async create(data: { key: string; name: string; description?: string }) {
+    const [created] = await this.db.context
+      .insert(schema.role)
+      .values(data)
+      .returning();
+    return created;
   }
 
-  /** Met à jour les champs d'un rôle existant identifié par son id. */
-  update(id: string, data: { key?: string; name?: string; description?: string | null }) {
-    return this.db.context.role.update({ where: { id }, data });
+  async update(id: string, data: { key?: string; name?: string; description?: string | null }) {
+    const [updated] = await this.db.context
+      .update(schema.role)
+      .set(data)
+      .where(eq(schema.role.id, id))
+      .returning();
+    return updated;
   }
 
-  /** Supprime le rôle identifié par son id. */
-  delete(id: string) {
-    return this.db.context.role.delete({ where: { id } });
+  async delete(id: string) {
+    await this.db.context.delete(schema.role).where(eq(schema.role.id, id));
   }
 }

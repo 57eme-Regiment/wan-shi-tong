@@ -15,7 +15,12 @@ export function createAccessClient(baseUrl: string) {
 
     if (!res.ok) return null;
 
-    return AccessMeResponseSchema.parse(await res.json());
+    const parsed = AccessMeResponseSchema.safeParse(await res.json());
+    if (!parsed.success) {
+      console.error('[access-client] Failed to parse /access/me response:', parsed.error);
+      return null;
+    }
+    return parsed.data;
   }
 
   function hasPermission(
