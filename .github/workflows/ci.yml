@@ -1,0 +1,39 @@
+name: CI — WanShiTong
+
+on:
+  push:
+    branches: [develop]
+    tags: ["v*"]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    uses: 57regiment/.github/.github/workflows/_reusable-build-node.yml@main
+    secrets: inherit
+    with:
+      artifact_name: wan-shi-tong-runtime
+      # wan-shi-tong a uniquement des dépendances internes (nabu self-ref)
+      # pas de cross-repo link: externe
+
+  docker:
+    needs: build
+    uses: 57regiment/.github/.github/workflows/_reusable-docker.yml@main
+    secrets: inherit
+    with:
+      image_name: wan-shi-tong
+      artifact_name: wan-shi-tong-runtime
+
+  deploy:
+    needs: docker
+    if: needs.docker.outputs.target == 'staging' || needs.docker.outputs.target == 'prod'
+    uses: 57regiment/.github/.github/workflows/_reusable-deploy.yml@main
+    secrets: inherit
+    with:
+      target: ${{ needs.docker.outputs.target }}
+      image_name: wan-shi-tong
