@@ -22,7 +22,7 @@ importers:
         version: link:nabu/packages/logger
       '@better-auth/drizzle-adapter':
         specifier: ^1.6.16
-        version: 1.6.16(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.1)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)))
+        version: 1.6.16(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.1)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)))
       '@fastify/cors':
         specifier: ^11.2.0
         version: 11.2.0
@@ -37,19 +37,19 @@ importers:
         version: 7.8.0
       '@prisma/client':
         specifier: ^7.8.0
-        version: 7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3)
+        version: 7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3)
       '@scalar/fastify-api-reference':
         specifier: ^1.58.0
         version: 1.58.0
       better-auth:
         specifier: ^1.6.11
-        version: 1.6.11(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(drizzle-kit@0.31.10)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)))(mysql2@3.15.3)(pg@8.21.0)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(react-dom@19.2.6(react@18.3.1))(react@18.3.1)
+        version: 1.6.11(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(drizzle-kit@0.31.10)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)))(mysql2@3.15.3)(pg@8.21.0)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(react-dom@19.2.6(react@18.3.1))(react@18.3.1)
       discord.js:
         specifier: ^14.26.4
         version: 14.26.4
       drizzle-orm:
         specifier: ^0.45.2
-        version: 0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))
+        version: 0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))
       fastify:
         specifier: ^5.0.0
         version: 5.8.5
@@ -92,19 +92,19 @@ importers:
         version: 0.31.10
       prisma:
         specifier: ^7.8.0
-        version: 7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+        version: 7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@22.19.19)(typescript@5.9.3)
+        version: 10.9.2(@types/node@22.19.19)(typescript@6.0.3)
       ts-node-dev:
         specifier: ^2.0.0
-        version: 2.0.0(@types/node@22.19.19)(typescript@5.9.3)
+        version: 2.0.0(@types/node@22.19.19)(typescript@6.0.3)
       tsconfig-paths:
         specifier: ^4.2.0
         version: 4.2.0
       typescript:
-        specifier: ^5.6.0
-        version: 5.9.3
+        specifier: ^6.0.3
+        version: 6.0.3
 
   packages/auth-browser:
     dependencies:
@@ -113,7 +113,7 @@ importers:
         version: link:../auth-contracts
       better-auth:
         specifier: ^1.2.0
-        version: 1.6.11(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(drizzle-kit@0.31.10)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)))(mysql2@3.15.3)(pg@8.21.0)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(react-dom@19.2.6(react@18.3.1))(react@18.3.1)
+        version: 1.6.11(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(drizzle-kit@0.31.10)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)))(mysql2@3.15.3)(pg@8.21.0)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(react-dom@19.2.6(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@types/react':
         specifier: ^18.0.0
@@ -122,8 +122,8 @@ importers:
         specifier: ^18.0.0
         version: 18.3.1
       typescript:
-        specifier: ^5.6.0
-        version: 5.9.3
+        specifier: ^6.0.0
+        version: 6.0.3
 
   packages/auth-contracts:
     dependencies:
@@ -135,8 +135,8 @@ importers:
         specifier: 3.53.0-rc.1
         version: 3.53.0-rc.1(@types/node@22.19.19)
       typescript:
-        specifier: ^5.6.0
-        version: 5.9.3
+        specifier: ^6.0.0
+        version: 6.0.3
 
   packages/auth-server:
     dependencies:
@@ -151,8 +151,8 @@ importers:
         specifier: ^5.0.0
         version: 5.8.5
       typescript:
-        specifier: ^5.6.0
-        version: 5.9.3
+        specifier: ^6.0.0
+        version: 6.0.3
 
 packages:
 
@@ -2011,8 +2011,8 @@ packages:
     resolution: {integrity: sha512-1URUxUqfHFM1c+zfSPsa3gnkO7Aq21qyH75SIduNYz4SzY964rn1X2vCMQaHSHhktiw+0kPa2iyb6PUpXqB6Vg==}
     engines: {node: '>=20'}
 
-  typescript@5.9.3:
-    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+  typescript@6.0.3:
+    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2099,19 +2099,19 @@ snapshots:
       nanostores: 1.3.0
       zod: 4.4.3
 
-  '@better-auth/drizzle-adapter@1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)))':
+  '@better-auth/drizzle-adapter@1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)))':
     dependencies:
       '@better-auth/core': 1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0)
       '@better-auth/utils': 0.4.0
     optionalDependencies:
-      drizzle-orm: 0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))
+      drizzle-orm: 0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))
 
-  '@better-auth/drizzle-adapter@1.6.16(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.1)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)))':
+  '@better-auth/drizzle-adapter@1.6.16(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.1)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)))':
     dependencies:
       '@better-auth/core': 1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0)
       '@better-auth/utils': 0.4.1
     optionalDependencies:
-      drizzle-orm: 0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))
+      drizzle-orm: 0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))
 
   '@better-auth/kysely-adapter@1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(kysely@0.28.17)':
     dependencies:
@@ -2130,13 +2130,13 @@ snapshots:
       '@better-auth/core': 1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0)
       '@better-auth/utils': 0.4.0
 
-  '@better-auth/prisma-adapter@1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))':
+  '@better-auth/prisma-adapter@1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))':
     dependencies:
       '@better-auth/core': 1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0)
       '@better-auth/utils': 0.4.0
     optionalDependencies:
-      '@prisma/client': 7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3)
-      prisma: 7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      '@prisma/client': 7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3)
+      prisma: 7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)
 
   '@better-auth/telemetry@1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)':
     dependencies:
@@ -2531,12 +2531,12 @@ snapshots:
 
   '@prisma/client-runtime-utils@7.8.0': {}
 
-  '@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3)':
+  '@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3)':
     dependencies:
       '@prisma/client-runtime-utils': 7.8.0
     optionalDependencies:
-      prisma: 7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
-      typescript: 5.9.3
+      prisma: 7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)
+      typescript: 6.0.3
 
   '@prisma/config@7.8.0':
     dependencies:
@@ -2551,7 +2551,7 @@ snapshots:
 
   '@prisma/debug@7.8.0': {}
 
-  '@prisma/dev@0.24.3(typescript@5.9.3)':
+  '@prisma/dev@0.24.3(typescript@6.0.3)':
     dependencies:
       '@electric-sql/pglite': 0.4.1
       '@electric-sql/pglite-socket': 0.1.1(@electric-sql/pglite@0.4.1)
@@ -2568,7 +2568,7 @@ snapshots:
       proper-lockfile: 4.1.2
       remeda: 2.33.4
       std-env: 3.10.0
-      valibot: 1.2.0(typescript@5.9.3)
+      valibot: 1.2.0(typescript@6.0.3)
       zeptomatch: 2.1.0
     transitivePeerDependencies:
       - typescript
@@ -2823,14 +2823,14 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  better-auth@1.6.11(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(drizzle-kit@0.31.10)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)))(mysql2@3.15.3)(pg@8.21.0)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(react-dom@19.2.6(react@18.3.1))(react@18.3.1):
+  better-auth@1.6.11(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(drizzle-kit@0.31.10)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)))(mysql2@3.15.3)(pg@8.21.0)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(react-dom@19.2.6(react@18.3.1))(react@18.3.1):
     dependencies:
       '@better-auth/core': 1.6.11(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0)
-      '@better-auth/drizzle-adapter': 1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)))
+      '@better-auth/drizzle-adapter': 1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)))
       '@better-auth/kysely-adapter': 1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(kysely@0.28.17)
       '@better-auth/memory-adapter': 1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)
       '@better-auth/mongo-adapter': 1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)
-      '@better-auth/prisma-adapter': 1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))
+      '@better-auth/prisma-adapter': 1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))
       '@better-auth/telemetry': 1.6.11(@better-auth/core@1.6.11(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.1.21)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)
       '@better-auth/utils': 0.4.0
       '@better-fetch/fetch': 1.1.21
@@ -2843,12 +2843,12 @@ snapshots:
       nanostores: 1.3.0
       zod: 4.4.3
     optionalDependencies:
-      '@prisma/client': 7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3)
+      '@prisma/client': 7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3)
       drizzle-kit: 0.31.10
-      drizzle-orm: 0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))
+      drizzle-orm: 0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))
       mysql2: 3.15.3
       pg: 8.21.0
-      prisma: 7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      prisma: 7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)
       react: 18.3.1
       react-dom: 19.2.6(react@18.3.1)
     transitivePeerDependencies:
@@ -2976,16 +2976,16 @@ snapshots:
       esbuild: 0.25.12
       tsx: 4.22.4
 
-  drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)):
+  drizzle-orm@0.45.2(@electric-sql/pglite@0.4.1)(@prisma/client@7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3))(@types/pg@8.20.0)(kysely@0.28.17)(mysql2@3.15.3)(pg@8.21.0)(postgres@3.4.9)(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)):
     optionalDependencies:
       '@electric-sql/pglite': 0.4.1
-      '@prisma/client': 7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3))(typescript@5.9.3)
+      '@prisma/client': 7.8.0(prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3)
       '@types/pg': 8.20.0
       kysely: 0.28.17
       mysql2: 3.15.3
       pg: 8.21.0
       postgres: 3.4.9
-      prisma: 7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      prisma: 7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3)
 
   dynamic-dedupe@0.3.0:
     dependencies:
@@ -3413,16 +3413,16 @@ snapshots:
 
   postgres@3.4.9: {}
 
-  prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@5.9.3):
+  prisma@7.8.0(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)(typescript@6.0.3):
     dependencies:
       '@prisma/config': 7.8.0
-      '@prisma/dev': 0.24.3(typescript@5.9.3)
+      '@prisma/dev': 0.24.3(typescript@6.0.3)
       '@prisma/engines': 7.8.0
       '@prisma/studio-core': 0.27.3(@types/react@18.3.29)(react-dom@19.2.6(react@18.3.1))(react@18.3.1)
       mysql2: 3.15.3
       postgres: 3.4.7
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
@@ -3566,7 +3566,7 @@ snapshots:
 
   ts-mixer@6.0.4: {}
 
-  ts-node-dev@2.0.0(@types/node@22.19.19)(typescript@5.9.3):
+  ts-node-dev@2.0.0(@types/node@22.19.19)(typescript@6.0.3):
     dependencies:
       chokidar: 3.6.0
       dynamic-dedupe: 0.3.0
@@ -3576,15 +3576,15 @@ snapshots:
       rimraf: 2.7.1
       source-map-support: 0.5.21
       tree-kill: 1.2.2
-      ts-node: 10.9.2(@types/node@22.19.19)(typescript@5.9.3)
+      ts-node: 10.9.2(@types/node@22.19.19)(typescript@6.0.3)
       tsconfig: 7.0.0
-      typescript: 5.9.3
+      typescript: 6.0.3
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - '@types/node'
 
-  ts-node@10.9.2(@types/node@22.19.19)(typescript@5.9.3):
+  ts-node@10.9.2(@types/node@22.19.19)(typescript@6.0.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.12
@@ -3598,7 +3598,7 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.4
       make-error: 1.3.6
-      typescript: 5.9.3
+      typescript: 6.0.3
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
@@ -3635,7 +3635,7 @@ snapshots:
     dependencies:
       tagged-tag: 1.0.0
 
-  typescript@5.9.3: {}
+  typescript@6.0.3: {}
 
   undici-types@6.21.0: {}
 
@@ -3643,9 +3643,9 @@ snapshots:
 
   v8-compile-cache-lib@3.0.1: {}
 
-  valibot@1.2.0(typescript@5.9.3):
+  valibot@1.2.0(typescript@6.0.3):
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
   which@2.0.2:
     dependencies:
