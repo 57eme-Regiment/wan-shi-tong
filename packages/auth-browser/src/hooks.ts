@@ -1,4 +1,7 @@
-import type { AccessMeResponse, Permission } from '@57eme-regiment/auth-contracts';
+import type {
+  AccessMeResponse,
+  Permission,
+} from '@57eme-regiment/auth-contracts';
 import { useEffect, useState } from 'react';
 import { getConfig } from './config';
 
@@ -21,7 +24,7 @@ export function useAccess(): {
 }
 
 /** Retourne true si l'utilisateur connecté possède la permission donnée. */
-export function useHasPermission(permission?: Permission): boolean {
+export function useHasPermission(permission?: Permission | null): boolean {
   if (!permission) return true;
   const { access } = useAccess();
   if (access?.user.isSuperAdmin) return true;
