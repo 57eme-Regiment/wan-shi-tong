@@ -1,7 +1,4 @@
-import type {
-  AccessMeResponse,
-  Permission,
-} from '@57eme-regiment/auth-contracts';
+import type { AccessMeResponse, Permission } from '@57eme-regiment/auth-contracts';
 import { useEffect, useState } from 'react';
 import { getConfig } from './config';
 
