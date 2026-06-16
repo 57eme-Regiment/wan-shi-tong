@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "lib": ["ES2022"],
     "outDir": "./dist",
     "rootDir": ".",
@@ -12,10 +12,13 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@57eme-regiment/auth-contracts": ["packages/auth-contracts/src/index.ts"],
+      "@57eme-regiment/auth-contracts": [
+        "packages/auth-contracts/src/index.ts"
+      ],
       "@57eme-regiment/auth-contracts/*": ["packages/auth-contracts/src/*"],
       "@57eme-regiment/nabu-errors": ["nabu/packages/errors/src/index.ts"],
       "@57eme-regiment/nabu-fastify": ["nabu/packages/fastify/src/index.ts"],
