@@ -11,7 +11,7 @@ declare module 'fastify' {
   }
 }
 
-export function requirePermission(permission: Permission | string) {
+export function requirePermission(permission: Permission) {
   return async function (request: FastifyRequest, reply: FastifyReply) {
     const result = await authorizeRequest({
       authServiceUrl: process.env['WANSHITONG_SERVICE_URL']!,
