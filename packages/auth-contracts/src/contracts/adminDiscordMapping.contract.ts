@@ -24,7 +24,7 @@ export const adminDiscordMappingContract = c.router(
         'Retourne tous les mappings entre rôles Discord et rôles applicatifs, ' +
         'triés par guildId. Inclut la clé et le nom du rôle applicatif associé. ' +
         'Requiert la permission `ADMIN_DISCORD_MAPPING_READ`.',
-      metadata: { tags: ['Admin - Discord'] },
+      metadata: { tags: ['Admin - Discord'] }, //TODO permission: PERMISSIONS.WAN_DISCORD_MAPPING_READ
     }),
     createMapping: c.mutation({
       method: 'POST',
@@ -39,9 +39,9 @@ export const adminDiscordMappingContract = c.router(
       summary: 'Créer un mapping Discord → rôle applicatif',
       description:
         'Associe un rôle Discord (identifié par guildId + discordRoleId) à un rôle applicatif (par sa clé). ' +
-        "Invalide les snapshots des utilisateurs possédant ce rôle Discord dans la guilde. " +
+        'Invalide les snapshots des utilisateurs possédant ce rôle Discord dans la guilde. ' +
         'Retourne 404 si le rôle applicatif est introuvable. Requiert `ADMIN_DISCORD_MAPPING_MANAGE`.',
-      metadata: { tags: ['Admin - Discord'] },
+      metadata: { tags: ['Admin - Discord'] }, //TODO permission: PERMISSIONS.WAN_DISCORD_MAPPING_CREATE
     }),
     deleteMapping: c.mutation({
       method: 'DELETE',
@@ -58,7 +58,7 @@ export const adminDiscordMappingContract = c.router(
       description:
         'Supprime le mapping et invalide les snapshots des utilisateurs concernés dans une transaction. ' +
         'Requiert la permission `ADMIN_DISCORD_MAPPING_MANAGE`.',
-      metadata: { tags: ['Admin - Discord'] },
+      metadata: { tags: ['Admin - Discord'] }, //TODO permission: PERMISSIONS.WAN_DISCORD_MAPPING_DELETE
     }),
   },
   { pathPrefix: '/admin/discord-mappings' },

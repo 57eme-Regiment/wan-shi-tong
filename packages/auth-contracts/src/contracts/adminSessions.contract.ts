@@ -20,9 +20,9 @@ export const adminSessionsContract = c.router(
       },
       summary: 'Lister les sessions actives',
       description:
-        "Retourne toutes les sessions non expirées, triées par date de création décroissante. " +
+        'Retourne toutes les sessions non expirées, triées par date de création décroissante. ' +
         "Inclut adresse IP, user-agent et date d'expiration. Requiert `ADMIN_SESSIONS_READ`.",
-      metadata: { tags: ['Admin - Sessions'] },
+      metadata: { tags: ['Admin - Sessions'] }, //TODO permission: PERMISSIONS.WAN_SESSION_READ
     }),
     revokeSession: c.mutation({
       method: 'DELETE',
@@ -39,7 +39,7 @@ export const adminSessionsContract = c.router(
       description:
         'Supprime immédiatement une session, déconnectant le navigateur concerné. ' +
         'Retourne 404 si la session est introuvable. Requiert `ADMIN_SESSIONS_REVOKE`.',
-      metadata: { tags: ['Admin - Sessions'] },
+      metadata: { tags: ['Admin - Sessions'] }, //TODO permission: PERMISSIONS.WAN_SESSION_REVOKE
     }),
   },
   { pathPrefix: '/admin/sessions' },

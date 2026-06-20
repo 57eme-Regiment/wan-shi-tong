@@ -1,5 +1,7 @@
 import { env } from '@/config/env';
+import { requirePermission } from '@57eme-regiment/auth-server';
 import { createErrorHandler } from '@57eme-regiment/nabu-errors';
+import { configurePermissionChecker } from '@57eme-regiment/nabu-fastify';
 import cors from '@fastify/cors';
 import fastifySwagger from '@fastify/swagger';
 import {
@@ -17,6 +19,8 @@ import { UsersRoutes } from './services/users/users.route';
 import { adminRoutes } from './servicesAdmin/admin.routes';
 
 export function buildApp() {
+  configurePermissionChecker(requirePermission);
+
   const app = Fastify({ logger: { level: 'error' } });
 
   app.addHook('onRequest', (req, _reply, done) => {

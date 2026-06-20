@@ -25,7 +25,7 @@ export const adminUsersContract = c.router(
       description:
         'Retourne les utilisateurs filtrés par fuzzy search sur le nom ou accountId. ' +
         'Requiert la permission `ADMIN_USERS_READ`.',
-      metadata: { tags: ['Admin - Utilisateurs'] },
+      metadata: { tags: ['Admin - Utilisateurs'] }, //TODO permission: PERMISSIONS.WAN_USERS_READ
     }),
     getAll: c.query({
       method: 'GET',
@@ -39,7 +39,7 @@ export const adminUsersContract = c.router(
       description:
         'Retourne la liste complète des utilisateurs avec leurs sessions actives. ' +
         'Requiert la permission `ADMIN_USERS_READ`.',
-      metadata: { tags: ['Admin - Utilisateurs'] },
+      metadata: { tags: ['Admin - Utilisateurs'] }, //TODO permission: PERMISSIONS.WAN_USERS_READ
     }),
     disableUser: c.mutation({
       method: 'POST',
@@ -58,7 +58,7 @@ export const adminUsersContract = c.router(
         "Désactive le compte d'un utilisateur et enregistre le motif. " +
         "Invalide les données de synchronisation Discord de l'utilisateur. " +
         'Retourne 409 si le compte est déjà désactivé. Requiert `ADMIN_USERS_MANAGE`.',
-      metadata: { tags: ['Admin - Utilisateurs'] },
+      metadata: { tags: ['Admin - Utilisateurs'] }, //TODO permission: PERMISSIONS.WAN_USERS_MANAGE
     }),
     enableUser: c.mutation({
       method: 'POST',
@@ -76,7 +76,7 @@ export const adminUsersContract = c.router(
       description:
         'Réactive un compte préalablement désactivé. ' +
         'Retourne 409 si le compte est déjà actif. Requiert `ADMIN_USERS_MANAGE`.',
-      metadata: { tags: ['Admin - Utilisateurs'] },
+      metadata: { tags: ['Admin - Utilisateurs'] }, //TODO permission: PERMISSIONS.WAN_USERS_MANAGE
     }),
     syncDiscord: c.mutation({
       method: 'POST',
@@ -94,7 +94,7 @@ export const adminUsersContract = c.router(
         "Déclenche une synchronisation manuelle des rôles Discord de l'utilisateur depuis le serveur configuré. " +
         "Invalide le snapshot d'accès afin que les permissions soient recalculées à la prochaine requête. " +
         'Retourne 404 si aucun compte Discord est lié. Requiert `ADMIN_USERS_MANAGE`.',
-      metadata: { tags: ['Admin - Utilisateurs'] },
+      metadata: { tags: ['Admin - Utilisateurs'] }, //TODO permission: PERMISSIONS.WAN_USERS_MANAGE
     }),
     setSuperAdmin: c.mutation({
       method: 'POST',
@@ -112,7 +112,7 @@ export const adminUsersContract = c.router(
         "Active ou désactive le statut super admin d'un utilisateur. " +
         'Un super admin passe toutes les vérifications de permission. ' +
         "Invalide le snapshot d'accès si le statut change. Requiert `ADMIN_USERS_MANAGE`.",
-      metadata: { tags: ['Admin - Utilisateurs'] },
+      metadata: { tags: ['Admin - Utilisateurs'] }, //TODO permission: PERMISSIONS.WAN_USERS_SETADMIN
     }),
   },
   { pathPrefix: '/admin/users' },

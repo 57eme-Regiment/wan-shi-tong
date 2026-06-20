@@ -18,6 +18,7 @@
   "packageManager": "pnpm@11.1.2",
   "dependencies": {
     "@57eme-regiment/auth-contracts": "workspace:*",
+    "@57eme-regiment/auth-server": "workspace:*",
     "@57eme-regiment/nabu-errors": "link:../wan-shi-tong/nabu/packages/errors",
     "@57eme-regiment/nabu-fastify": "link:../wan-shi-tong/nabu/packages/fastify",
     "@57eme-regiment/nabu-logger": "link:../wan-shi-tong/nabu/packages/logger",

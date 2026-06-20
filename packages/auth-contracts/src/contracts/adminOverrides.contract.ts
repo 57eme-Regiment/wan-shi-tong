@@ -23,10 +23,10 @@ export const adminOverridesContract = c.router(
       },
       summary: "Lister les overrides de permissions d'un utilisateur",
       description:
-        "Retourne tous les overrides de permissions (allow/deny) configurés pour un utilisateur donné. " +
+        'Retourne tous les overrides de permissions (allow/deny) configurés pour un utilisateur donné. ' +
         "Un override permet d'accorder ou de refuser une permission indépendamment des rôles. " +
         'Requiert la permission `ADMIN_PERMISSIONS_READ`.',
-      metadata: { tags: ['Admin - Overrides'] },
+      metadata: { tags: ['Admin - Overrides'] }, //TODO permission: PERMISSIONS.WAN_OVERRIDE_READ
     }),
     upsertOverride: c.mutation({
       method: 'POST',
@@ -45,7 +45,7 @@ export const adminOverridesContract = c.router(
         "L'effet peut être `allow` (forcer l'accès) ou `deny` (bloquer l'accès). " +
         "Invalide le snapshot d'accès de l'utilisateur. " +
         'Retourne 404 si la permission est introuvable. Requiert `ADMIN_PERMISSIONS_MANAGE`.',
-      metadata: { tags: ['Admin - Overrides'] },
+      metadata: { tags: ['Admin - Overrides'] }, //TODO permission: PERMISSIONS.WAN_OVERRIDE_MANAGE
     }),
     deleteOverride: c.mutation({
       method: 'DELETE',
@@ -58,11 +58,11 @@ export const adminOverridesContract = c.router(
         403: AdminErrorSchema,
         404: AdminErrorSchema,
       },
-      summary: "Supprimer un override de permission",
+      summary: 'Supprimer un override de permission',
       description:
         "Supprime l'override d'une permission pour un utilisateur et invalide son snapshot d'accès. " +
         'Retourne 404 si la permission ou le override est introuvable. Requiert `ADMIN_PERMISSIONS_MANAGE`.',
-      metadata: { tags: ['Admin - Overrides'] },
+      metadata: { tags: ['Admin - Overrides'] }, //TODO permission: PERMISSIONS.WAN_OVERRIDE_DELETE
     }),
   },
   { pathPrefix: '/admin/overrides' },

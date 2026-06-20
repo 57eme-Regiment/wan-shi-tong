@@ -23,8 +23,8 @@ export const adminPermisisionsContract = c.router(
       summary: 'Lister les permissions applicatives',
       description:
         'Retourne la liste de toutes les permissions disponibles dans le système, triées par clé. ' +
-        'Requiert la permission `ADMIN_PERMISSIONS_READ`.',
-      metadata: { tags: ['Admin - Permissions'] },
+        'Requiert la permission `WAN_PERMISSIONS_READ`.',
+      metadata: { tags: ['Admin - Permissions'] }, //TODO permission: PERMISSIONS.WAN_PERMISSION_READ
     }),
     createPermissions: c.mutation({
       method: 'POST',
@@ -40,7 +40,7 @@ export const adminPermisisionsContract = c.router(
       description:
         'Crée une nouvelle permission applicative identifiée par une clé unique. ' +
         'Retourne 409 si une permission avec cette clé existe déjà. Requiert `ADMIN_PERMISSIONS_MANAGE`.',
-      metadata: { tags: ['Admin - Permissions'] },
+      metadata: { tags: ['Admin - Permissions'] }, //TODO permission: PERMISSIONS.WAN_PERMISSION_CREATE
     }),
     updatePermission: c.mutation({
       method: 'PUT',
@@ -57,7 +57,7 @@ export const adminPermisisionsContract = c.router(
       description:
         'Met à jour la clé ou la description de la permission. ' +
         'Requiert la permission `ADMIN_PERMISSIONS_MANAGE`.',
-      metadata: { tags: ['Admin - Permissions'] },
+      metadata: { tags: ['Admin - Permissions'] }, //TODO permission: PERMISSIONS.WAN_PERMISSION_MANAGE
     }),
     deletePermissions: c.mutation({
       method: 'DELETE',
@@ -74,7 +74,7 @@ export const adminPermisisionsContract = c.router(
       description:
         'Supprime la permission et invalide tous les snapshots dans une transaction ' +
         '(les rôles peuvent en dépendre). Requiert `ADMIN_PERMISSIONS_MANAGE`.',
-      metadata: { tags: ['Admin - Permissions'] },
+      metadata: { tags: ['Admin - Permissions'] }, //TODO permission: PERMISSIONS.WAN_PERMISSION_DELETE
     }),
   },
   { pathPrefix: '/admin/permissions' },

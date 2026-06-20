@@ -11,6 +11,9 @@ importers:
       '@57eme-regiment/auth-contracts':
         specifier: workspace:*
         version: link:packages/auth-contracts
+      '@57eme-regiment/auth-server':
+        specifier: workspace:*
+        version: link:packages/auth-server
       '@57eme-regiment/nabu-errors':
         specifier: link:../wan-shi-tong/nabu/packages/errors
         version: link:nabu/packages/errors
