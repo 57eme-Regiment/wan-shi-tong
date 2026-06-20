@@ -7,6 +7,7 @@ import {
   OverrideDeleteParamsSchema,
   OverrideUserParamsSchema,
 } from '../schemas/admin.schema';
+import { PERMISSIONS } from '../permissions';
 
 const c = initContract();
 
@@ -25,8 +26,11 @@ export const adminOverridesContract = c.router(
       description:
         'Retourne tous les overrides de permissions (allow/deny) configurés pour un utilisateur donné. ' +
         "Un override permet d'accorder ou de refuser une permission indépendamment des rôles. " +
-        'Requiert la permission `ADMIN_PERMISSIONS_READ`.',
-      metadata: { tags: ['Admin - Overrides'] }, //TODO permission: PERMISSIONS.WAN_OVERRIDE_READ
+        'Requiert la permission `WAN_OVERRIDE_READ`.',
+      metadata: {
+        tags: ['Admin - Overrides'],
+        permission: PERMISSIONS.WAN_OVERRIDE_READ,
+      },
     }),
     upsertOverride: c.mutation({
       method: 'POST',
@@ -44,8 +48,11 @@ export const adminOverridesContract = c.router(
         "Crée ou met à jour (upsert) l'override d'une permission pour un utilisateur. " +
         "L'effet peut être `allow` (forcer l'accès) ou `deny` (bloquer l'accès). " +
         "Invalide le snapshot d'accès de l'utilisateur. " +
-        'Retourne 404 si la permission est introuvable. Requiert `ADMIN_PERMISSIONS_MANAGE`.',
-      metadata: { tags: ['Admin - Overrides'] }, //TODO permission: PERMISSIONS.WAN_OVERRIDE_MANAGE
+        'Retourne 404 si la permission est introuvable. Requiert `WAN_OVERRIDE_MANAGE`.',
+      metadata: {
+        tags: ['Admin - Overrides'],
+        permission: PERMISSIONS.WAN_OVERRIDE_MANAGE,
+      },
     }),
     deleteOverride: c.mutation({
       method: 'DELETE',
@@ -62,7 +69,10 @@ export const adminOverridesContract = c.router(
       description:
         "Supprime l'override d'une permission pour un utilisateur et invalide son snapshot d'accès. " +
         'Retourne 404 si la permission ou le override est introuvable. Requiert `ADMIN_PERMISSIONS_MANAGE`.',
-      metadata: { tags: ['Admin - Overrides'] }, //TODO permission: PERMISSIONS.WAN_OVERRIDE_DELETE
+      metadata: {
+        tags: ['Admin - Overrides'],
+        permission: PERMISSIONS.WAN_OVERRIDE_DELETE,
+      },
     }),
   },
   { pathPrefix: '/admin/overrides' },

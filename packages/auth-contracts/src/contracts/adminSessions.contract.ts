@@ -1,5 +1,6 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
+import { PERMISSIONS } from '../permissions';
 import {
   AdminErrorSchema,
   AdminSessionSchema,
@@ -21,8 +22,11 @@ export const adminSessionsContract = c.router(
       summary: 'Lister les sessions actives',
       description:
         'Retourne toutes les sessions non expirées, triées par date de création décroissante. ' +
-        "Inclut adresse IP, user-agent et date d'expiration. Requiert `ADMIN_SESSIONS_READ`.",
-      metadata: { tags: ['Admin - Sessions'] }, //TODO permission: PERMISSIONS.WAN_SESSION_READ
+        "Inclut adresse IP, user-agent et date d'expiration. Requiert `WAN_SESSION_READ`.",
+      metadata: {
+        tags: ['Admin - Sessions'],
+        permission: PERMISSIONS.WAN_SESSION_READ,
+      },
     }),
     revokeSession: c.mutation({
       method: 'DELETE',
@@ -38,8 +42,11 @@ export const adminSessionsContract = c.router(
       summary: 'Révoquer une session',
       description:
         'Supprime immédiatement une session, déconnectant le navigateur concerné. ' +
-        'Retourne 404 si la session est introuvable. Requiert `ADMIN_SESSIONS_REVOKE`.',
-      metadata: { tags: ['Admin - Sessions'] }, //TODO permission: PERMISSIONS.WAN_SESSION_REVOKE
+        'Retourne 404 si la session est introuvable. Requiert `WAN_SESSION_REVOKE`.',
+      metadata: {
+        tags: ['Admin - Sessions'],
+        permission: PERMISSIONS.WAN_SESSION_REVOKE,
+      },
     }),
   },
   { pathPrefix: '/admin/sessions' },

@@ -14,7 +14,9 @@ export const UsersContract = c.router(
       description:
         'Retourne les informations publiques de base (id, nom, avatar, statut) ' +
         "d'un utilisateur identifié par son UUID interne.",
-      metadata: { tags: ['Utilisateurs'] },
+      metadata: {
+        tags: ['Utilisateurs'],
+      },
       responses: {
         200: UserSchema,
         401: ErrorSchema,
