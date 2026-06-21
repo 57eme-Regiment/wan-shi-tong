@@ -2,35 +2,14 @@ name: Build Changed Packages
 description: Build uniquement les packages qui ont des changements.
 
 inputs:
-  auth-contracts:
-    description: true si auth-contracts doit être buildé
-    required: true
-  auth-server:
-    description: true si auth-server doit être buildé
-    required: true
-  auth-browser:
-    description: true si auth-browser doit être buildé
+  auth-package:
+    description: true si auth-package doit être buildé
     required: true
 
 runs:
   using: composite
   steps:
-    - name: Build auth-contracts
-      if: inputs.auth-contracts == 'true'
+    - name: Build auth-package
+      if: inputs.auth-package == 'true'
       shell: bash
-      run: pnpm --filter @57eme-regiment/auth-contracts build
-
-    - name: Build auth-server
-      if: inputs.auth-server == 'true'
-      shell: bash
-      run: |
-        # auth-contracts est une dépendance — s'assurer qu'il est buildé
-        [ -f packages/auth-contracts/dist/index.js ] || pnpm --filter @57eme-regiment/auth-contracts build
-        pnpm --filter @57eme-regiment/auth-server build
-
-    - name: Build auth-browser
-      if: inputs.auth-browser == 'true'
-      shell: bash
-      run: |
-        [ -f packages/auth-contracts/dist/index.js ] || pnpm --filter @57eme-regiment/auth-contracts build
-        pnpm --filter @57eme-regiment/auth-browser build
+      run: pnpm --filter @57eme-regiment/auth-package build

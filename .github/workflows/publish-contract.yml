@@ -1,4 +1,4 @@
-name: Publish Auth Packages
+name: Publish Auth Package
 
 on:
   push:
@@ -41,45 +41,20 @@ jobs:
       - name: Build changed packages
         uses: ./.github/actions/build-packages
         with:
-          auth-contracts: ${{ steps.changes.outputs.auth-contracts }}
-          auth-server:    ${{ steps.changes.outputs.auth-server }}
-          auth-browser:   ${{ steps.changes.outputs.auth-browser }}
+          auth-package: ${{ steps.changes.outputs.auth-package }}
 
       # ── Publish stable (main) ─────────────────────────────────────────────
-      - name: Publish auth-contracts (latest)
-        id: pub-contracts
-        if: github.ref == 'refs/heads/main' && steps.changes.outputs.auth-contracts == 'true'
+      - name: Publish auth-package (latest)
+        id: pub-package
+        if: github.ref == 'refs/heads/main' && steps.changes.outputs.auth-package == 'true'
         uses: ./.github/actions/publish-package
         with:
-          package:         auth-contracts
-          tag:             latest
-          node-auth-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish auth-server (latest)
-        id: pub-server
-        if: github.ref == 'refs/heads/main' && steps.changes.outputs.auth-server == 'true'
-        uses: ./.github/actions/publish-package
-        with:
-          package:         auth-server
-          tag:             latest
-          node-auth-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish auth-browser (latest)
-        id: pub-browser
-        if: github.ref == 'refs/heads/main' && steps.changes.outputs.auth-browser == 'true'
-        uses: ./.github/actions/publish-package
-        with:
-          package:         auth-browser
+          package:         auth-package
           tag:             latest
           node-auth-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit version bumps
-        if: |
-          github.ref == 'refs/heads/main' && (
-            steps.pub-contracts.outputs.bumped == 'true' ||
-            steps.pub-server.outputs.bumped    == 'true' ||
-            steps.pub-browser.outputs.bumped   == 'true'
-          )
+        if: github.ref == 'refs/heads/main' && steps.pub-package.outputs.bumped == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -87,29 +62,11 @@ jobs:
           git push
 
       # ── Publish beta (autres branches) ────────────────────────────────────
-      - name: Publish auth-contracts (beta)
-        if: github.ref != 'refs/heads/main' && steps.changes.outputs.auth-contracts == 'true'
+      - name: Publish auth-package (beta)
+        if: github.ref != 'refs/heads/main' && steps.changes.outputs.auth-package == 'true'
         uses: ./.github/actions/publish-package
         with:
-          package:         auth-contracts
-          tag:             beta
-          run-number:      ${{ github.run_number }}
-          node-auth-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish auth-server (beta)
-        if: github.ref != 'refs/heads/main' && steps.changes.outputs.auth-server == 'true'
-        uses: ./.github/actions/publish-package
-        with:
-          package:         auth-server
-          tag:             beta
-          run-number:      ${{ github.run_number }}
-          node-auth-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish auth-browser (beta)
-        if: github.ref != 'refs/heads/main' && steps.changes.outputs.auth-browser == 'true'
-        uses: ./.github/actions/publish-package
-        with:
-          package:         auth-browser
+          package:         auth-package
           tag:             beta
           run-number:      ${{ github.run_number }}
           node-auth-token: ${{ secrets.GITHUB_TOKEN }}

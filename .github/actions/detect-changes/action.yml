@@ -10,15 +10,9 @@ inputs:
     required: true
 
 outputs:
-  auth-contracts:
-    description: true si auth-contracts a changé
-    value: ${{ steps.detect.outputs.auth-contracts }}
-  auth-server:
-    description: true si auth-server a changé
-    value: ${{ steps.detect.outputs.auth-server }}
-  auth-browser:
-    description: true si auth-browser a changé
-    value: ${{ steps.detect.outputs.auth-browser }}
+  auth-package:
+    description: true si auth-package a changé
+    value: ${{ steps.detect.outputs.auth-package }}
 
 runs:
   using: composite
@@ -33,7 +27,7 @@ runs:
           BASE=$(git rev-list --max-parents=0 HEAD)
         fi
 
-        for PKG in auth-contracts auth-server auth-browser; do
+        for PKG in auth-package; do
           if git diff --name-only "$BASE" "${{ inputs.head-sha }}" -- "packages/$PKG/" | grep -q .; then
             echo "$PKG=true" >> $GITHUB_OUTPUT
             echo "✓ [$PKG] changements détectés"
