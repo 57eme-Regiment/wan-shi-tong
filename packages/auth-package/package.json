@@ -1,6 +1,6 @@
 {
   "name": "@57eme-regiment/auth-package",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Shared auth types, permission constants, server middleware and browser clients for the 57ème Régiment ecosystem",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
