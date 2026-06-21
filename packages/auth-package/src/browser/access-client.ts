@@ -1,11 +1,5 @@
-import type {
-  AccessMeResponse,
-  Permission,
-} from '@57eme-regiment/auth-contracts';
-import {
-  accessContract,
-  AccessMeResponseSchema,
-} from '@57eme-regiment/auth-contracts';
+import type { AccessMeResponse, Permission } from '@57eme-regiment/auth-package';
+import { accessContract, AccessMeResponseSchema } from '@57eme-regiment/auth-package';
 
 export function createAccessClient(baseUrl: string) {
   async function getMyAccess(): Promise<AccessMeResponse | null> {

@@ -1,6 +1,6 @@
 import { container } from '@/infrastructure/container';
 import { declareRoute } from '@57eme-regiment/nabu-fastify';
-import { adminOverridesContract } from '@57eme-regiment/auth-contracts';
+import { adminOverridesContract } from '@57eme-regiment/auth-package';
 import { ZodTypeProvider } from '@fastify/type-provider-zod';
 import type { FastifyInstance } from 'fastify';
 import { AdminOverrideController } from './adminOverride.controller';

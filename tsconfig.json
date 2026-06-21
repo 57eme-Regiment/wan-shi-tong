@@ -4,6 +4,7 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "lib": ["ES2022"],
+    "types": ["node"],
     "outDir": "./dist",
     "rootDir": ".",
     "strict": true,
@@ -16,16 +17,23 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@57eme-regiment/auth-contracts": [
-        "packages/auth-contracts/src/index.ts"
+      "@57eme-regiment/auth-package": [
+        "packages/auth-package/src/index.ts"
       ],
-      "@57eme-regiment/auth-contracts/*": ["packages/auth-contracts/src/*"],
-      "@57eme-regiment/auth-server/*": ["packages/auth-server/src/*"],
+      "@57eme-regiment/auth-package/*": ["packages/auth-package/src/*"],
       "@57eme-regiment/nabu-errors": ["nabu/packages/errors/src/index.ts"],
       "@57eme-regiment/nabu-fastify": ["nabu/packages/fastify/src/index.ts"],
       "@57eme-regiment/nabu-logger": ["nabu/packages/logger/src/index.ts"]
     }
   },
-  "include": ["src/**/*", "packages/auth-contracts/src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*",
+    "packages/auth-package/src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "packages/auth-package/src/server",
+    "packages/auth-package/src/browser"
+  ]
 }

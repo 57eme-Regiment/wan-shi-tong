@@ -8,12 +8,9 @@ importers:
 
   .:
     dependencies:
-      '@57eme-regiment/auth-contracts':
+      '@57eme-regiment/auth-package':
         specifier: workspace:*
-        version: link:packages/auth-contracts
-      '@57eme-regiment/auth-server':
-        specifier: workspace:*
-        version: link:packages/auth-server
+        version: link:packages/auth-package
       '@57eme-regiment/nabu-errors':
         specifier: link:../wan-shi-tong/nabu/packages/errors
         version: link:nabu/packages/errors
@@ -100,27 +97,11 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/auth-browser:
+  packages/auth-package:
     dependencies:
-      '@57eme-regiment/auth-contracts':
-        specifier: workspace:*
-        version: link:../auth-contracts
       better-auth:
         specifier: ^1.2.0
         version: 1.6.11(drizzle-kit@0.31.10)(drizzle-orm@0.45.2(@types/pg@8.20.0)(kysely@0.28.17)(pg@8.21.0)(postgres@3.4.9))(pg@8.21.0)(react@18.3.1)
-    devDependencies:
-      '@types/react':
-        specifier: ^18.0.0
-        version: 18.3.29
-      react:
-        specifier: ^18.0.0
-        version: 18.3.1
-      typescript:
-        specifier: ^6.0.0
-        version: 6.0.3
-
-  packages/auth-contracts:
-    dependencies:
       zod:
         specifier: '>=3'
         version: 4.4.3
@@ -128,22 +109,18 @@ importers:
       '@ts-rest/core':
         specifier: 3.53.0-rc.1
         version: 3.53.0-rc.1(@types/node@22.19.19)
-      typescript:
-        specifier: ^6.0.0
-        version: 6.0.3
-
-  packages/auth-server:
-    dependencies:
-      '@57eme-regiment/auth-contracts':
-        specifier: workspace:*
-        version: link:../auth-contracts
-    devDependencies:
       '@types/node':
         specifier: ^22.0.0
         version: 22.19.19
+      '@types/react':
+        specifier: ^18.0.0
+        version: 18.3.29
       fastify:
         specifier: ^5.0.0
         version: 5.8.5
+      react:
+        specifier: ^18.0.0
+        version: 18.3.1
       typescript:
         specifier: ^6.0.0
         version: 6.0.3

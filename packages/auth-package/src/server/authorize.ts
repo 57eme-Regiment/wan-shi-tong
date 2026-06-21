@@ -1,5 +1,5 @@
-import type { AuthorizeBody, AuthorizeResponse } from '@57eme-regiment/auth-contracts';
-import { authorizeContract, AuthorizeResponseSchema } from '@57eme-regiment/auth-contracts';
+import type { AuthorizeBody, AuthorizeResponse } from '@57eme-regiment/auth-package';
+import { authorizeContract, AuthorizeResponseSchema } from '@57eme-regiment/auth-package';
 
 export async function authorizeRequest(params: {
   authServiceUrl: string;

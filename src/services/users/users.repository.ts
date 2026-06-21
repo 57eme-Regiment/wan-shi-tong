@@ -1,5 +1,5 @@
 import { Database } from '@/infrastructure/database';
-import { User } from '@57eme-regiment/auth-contracts/schemas/user.schema';
+import { User } from '@57eme-regiment/auth-package/schemas/user.schema';
 import { injectable } from 'tsyringe';
 
 /** Accès aux données Prisma pour le modèle User (consultation publique). */

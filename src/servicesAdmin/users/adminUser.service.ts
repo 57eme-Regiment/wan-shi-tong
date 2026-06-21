@@ -7,7 +7,7 @@ import {
   assertEnabled,
   findUserOrThrow,
 } from '@/shared/helpers/userHelper';
-import { UserQuery } from '@57eme-regiment/auth-contracts';
+import { UserQuery } from '@57eme-regiment/auth-package';
 import { AppError } from '@57eme-regiment/nabu-errors';
 import { eq, sql } from 'drizzle-orm';
 import { injectable } from 'tsyringe';

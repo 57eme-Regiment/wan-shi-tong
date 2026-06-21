@@ -1,4 +1,4 @@
-import { PERMISSIONS } from '@57eme-regiment/auth-contracts';
+import { PERMISSIONS } from '@57eme-regiment/auth-package';
 import 'dotenv/config';
 import { inArray } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';

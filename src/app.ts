@@ -1,5 +1,5 @@
 import { env } from '@/config/env';
-import { requirePermission } from '@57eme-regiment/auth-server';
+import { requirePermission } from '@57eme-regiment/auth-package/server';
 import { createErrorHandler } from '@57eme-regiment/nabu-errors';
 import { configurePermissionChecker } from '@57eme-regiment/nabu-fastify';
 import cors from '@fastify/cors';

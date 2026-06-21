@@ -3,16 +3,16 @@
     "target": "ES2022",
     "module": "CommonJS",
     "moduleResolution": "node",
-    "lib": ["ES2022"],
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "lib": ["ES2022", "DOM"],
+    "jsx": "react-jsx",
+    "outDir": "./dist/browser",
+    "rootDir": "./src/browser",
     "strict": true,
     "declaration": true,
     "declarationMap": true,
-    "composite": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "ignoreDeprecations": "6.0"
   },
-  "include": ["src/**/*"]
+  "include": ["src/browser/**/*"]
 }

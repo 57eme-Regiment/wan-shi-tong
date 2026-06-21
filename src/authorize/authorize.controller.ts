@@ -2,7 +2,7 @@ import { env } from '@/config/env';
 import { Database } from '@/infrastructure/database';
 import { auth } from '@/lib/auth/betterAuth';
 import { PermissionResolverService } from '@/services/permission/permissionResolver.service';
-import type { Permission } from '@57eme-regiment/auth-contracts';
+import type { Permission } from '@57eme-regiment/auth-package';
 import { fromNodeHeaders } from 'better-auth/node';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { injectable } from 'tsyringe';

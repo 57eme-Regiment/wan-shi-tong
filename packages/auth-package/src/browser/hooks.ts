@@ -1,11 +1,7 @@
-import type {
-  AccessMeResponse,
-  Permission,
-} from '@57eme-regiment/auth-contracts';
+import type { AccessMeResponse, Permission } from '@57eme-regiment/auth-package';
 import { useEffect, useState } from 'react';
 import { getConfig } from './config';
 
-/** Récupère les informations d'accès de l'utilisateur connecté (rôles + permissions). */
 export function useAccess(): {
   access: AccessMeResponse | null;
   loading: boolean;
@@ -23,7 +19,6 @@ export function useAccess(): {
   return { access, loading };
 }
 
-/** Retourne true si l'utilisateur connecté possède la permission donnée. */
 export function useHasPermission(permission?: Permission | null): boolean {
   if (!permission) return true;
   const { access } = useAccess();

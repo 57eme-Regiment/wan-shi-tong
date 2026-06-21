@@ -1,5 +1,5 @@
 import { env } from '@/config/env';
-import { UserQuery } from '@57eme-regiment/auth-contracts';
+import { UserQuery } from '@57eme-regiment/auth-package';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { injectable } from 'tsyringe';
 import { AdminUserService } from './adminUser.service';

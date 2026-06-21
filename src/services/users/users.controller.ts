@@ -1,4 +1,4 @@
-import { UserParams } from '@57eme-regiment/auth-contracts/schemas/user.schema';
+import { UserParams } from '@57eme-regiment/auth-package/schemas/user.schema';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { injectable } from 'tsyringe';
 import { UsersService } from './users.service';

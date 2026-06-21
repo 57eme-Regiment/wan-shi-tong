@@ -1,0 +1,59 @@
+{
+  "name": "@57eme-regiment/auth-package",
+  "version": "2.0.0",
+  "description": "Shared auth types, permission constants, server middleware and browser clients for the 57ème Régiment ecosystem",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json && tsc --project tsconfig.server.json && tsc --project tsconfig.browser.json",
+    "dev": "tsc --project tsconfig.json --watch & tsc --project tsconfig.server.json --watch & tsc --project tsconfig.browser.json --watch"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./dist/server/index.d.ts",
+      "default": "./dist/server/index.js"
+    },
+    "./browser": {
+      "types": "./dist/browser/index.d.ts",
+      "default": "./dist/browser/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "server": ["./dist/server/index.d.ts"],
+      "browser": ["./dist/browser/index.d.ts"]
+    }
+  },
+  "dependencies": {
+    "better-auth": "^1.2.0"
+  },
+  "peerDependencies": {
+    "@ts-rest/core": ">=3.50.0",
+    "fastify": ">=5",
+    "react": ">=18",
+    "zod": ">=3"
+  },
+  "peerDependenciesMeta": {
+    "fastify": { "optional": true },
+    "react": { "optional": true }
+  },
+  "devDependencies": {
+    "@ts-rest/core": "3.53.0-rc.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.0.0",
+    "fastify": "^5.0.0",
+    "react": "^18.0.0",
+    "typescript": "^6.0.0"
+  }
+}

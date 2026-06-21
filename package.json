@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "dev": "pnpm --filter @57eme-regiment/auth-contracts dev & ts-node-dev --respawn -r tsconfig-paths/register src/main.ts --watch packages/contract/src",
-    "build": "pnpm -r --filter @57eme-regiment/auth-contracts --filter @57eme-regiment/auth-server --filter @57eme-regiment/auth-browser build && tsc --project tsconfig.json",
+    "dev": "pnpm --filter @57eme-regiment/auth-package dev & ts-node-dev --respawn -r tsconfig-paths/register src/main.ts --watch packages/contract/src",
+    "build": "pnpm -r --filter @57eme-regiment/auth-package build && tsc --project tsconfig.json",
     "start": "node dist/src/main.js",
     "typecheck": "tsc --noEmit",
     "db:generate": "drizzle-kit generate --name",
@@ -17,8 +17,7 @@
   "license": "ISC",
   "packageManager": "pnpm@11.1.2",
   "dependencies": {
-    "@57eme-regiment/auth-contracts": "workspace:*",
-    "@57eme-regiment/auth-server": "workspace:*",
+    "@57eme-regiment/auth-package": "workspace:*",
     "@57eme-regiment/nabu-errors": "link:../wan-shi-tong/nabu/packages/errors",
     "@57eme-regiment/nabu-fastify": "link:../wan-shi-tong/nabu/packages/fastify",
     "@57eme-regiment/nabu-logger": "link:../wan-shi-tong/nabu/packages/logger",

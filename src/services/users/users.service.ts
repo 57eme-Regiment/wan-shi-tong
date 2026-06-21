@@ -1,4 +1,4 @@
-import { User } from '@57eme-regiment/auth-contracts/schemas/user.schema';
+import { User } from '@57eme-regiment/auth-package/schemas/user.schema';
 import { AppError } from '@57eme-regiment/nabu-errors';
 import { injectable } from 'tsyringe';
 import { UsersRepository } from './users.repository';

@@ -1,7 +1,4 @@
-import type {
-  AuthorizedUser,
-  Permission,
-} from '@57eme-regiment/auth-contracts';
+import type { AuthorizedUser, Permission } from '@57eme-regiment/auth-package';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { authorizeRequest } from './authorize';
 
