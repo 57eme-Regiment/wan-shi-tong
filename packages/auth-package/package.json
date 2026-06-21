@@ -1,6 +1,6 @@
 {
   "name": "@57eme-regiment/auth-package",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Shared auth types, permission constants, server middleware and browser clients for the 57ème Régiment ecosystem",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,8 +31,12 @@
   },
   "typesVersions": {
     "*": {
-      "server": ["./dist/server/index.d.ts"],
-      "browser": ["./dist/browser/index.d.ts"]
+      "server": [
+        "./dist/server/index.d.ts"
+      ],
+      "browser": [
+        "./dist/browser/index.d.ts"
+      ]
     }
   },
   "dependencies": {
@@ -45,8 +49,12 @@
     "zod": ">=3"
   },
   "peerDependenciesMeta": {
-    "fastify": { "optional": true },
-    "react": { "optional": true }
+    "fastify": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@ts-rest/core": "3.53.0-rc.1",
