@@ -4,7 +4,6 @@ import { DiscordRoleSyncRepository } from '@/services/discord/discord-role-sync.
 import { DiscordRoleSyncService } from '@/services/discord/discordRoleSync.service';
 import { PermissionResolverRepository } from '@/services/permission/permissionResolver.repository';
 import { PermissionResolverService } from '@/services/permission/permissionResolver.service';
-import { AdminGuard } from '@/servicesAdmin/adminGuard';
 import { AdminDiscordMappingController } from '@/servicesAdmin/discordMapping/adminDiscordMapping.controller';
 import { AdminDiscordMappingRepository } from '@/servicesAdmin/discordMapping/adminDiscordMapping.repository';
 import { AdminDiscordMappingService } from '@/servicesAdmin/discordMapping/adminDiscordMapping.service';
@@ -35,7 +34,6 @@ container.registerSingleton(PermissionResolverService);
 container.registerSingleton(AccessController);
 container.registerSingleton(AuthorizeController);
 
-container.registerSingleton(AdminGuard);
 container.registerSingleton(AdminRoleRepository);
 container.registerSingleton(AdminRoleService);
 container.registerSingleton(AdminRoleController);

@@ -1,20 +1,14 @@
-import { PERMISSIONS } from '@57eme-regiment/auth-contracts';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { injectable } from 'tsyringe';
-import { AdminGuard } from '../adminGuard';
 import { AdminDiscordMappingService } from './adminDiscordMapping.service';
 
 /** Contrôleur HTTP pour la gestion des mappings Discord ↔ rôles applicatifs (admin). */
 @injectable()
 export class AdminDiscordMappingController {
-  constructor(
-    private readonly guard: AdminGuard,
-    private readonly service: AdminDiscordMappingService,
-  ) {}
+  constructor(private readonly service: AdminDiscordMappingService) {}
 
   /** Retourne la liste de tous les mappings Discord existants. */
   async getAll(request: FastifyRequest, reply: FastifyReply) {
-    await this.guard.authorize(request, PERMISSIONS.ADMIN_DISCORD_MAPPING_READ);
     return reply.send(await this.service.getAll());
   }
 
@@ -25,10 +19,6 @@ export class AdminDiscordMappingController {
     }>,
     reply: FastifyReply,
   ) {
-    await this.guard.authorize(
-      request,
-      PERMISSIONS.ADMIN_DISCORD_MAPPING_MANAGE,
-    );
     return reply.code(201).send(await this.service.create(request.body));
   }
 
@@ -40,10 +30,6 @@ export class AdminDiscordMappingController {
     request: FastifyRequest<{ Params: { id: string } }>,
     reply: FastifyReply,
   ) {
-    await this.guard.authorize(
-      request,
-      PERMISSIONS.ADMIN_DISCORD_MAPPING_MANAGE,
-    );
     await this.service.delete(request.params.id);
     return reply.code(204).send();
   }

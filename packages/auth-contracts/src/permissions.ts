@@ -1,19 +1,14 @@
 import z from 'zod';
 
 export const PERMISSIONS = {
-  // Hermes
+  // Access
+  WAN_ACCESS: 'wan:access',
+  KRANG_ACCESS: 'krang:access',
+  RENENUTET_ACCESS: 'renenutet:access',
+  FOXWATCHER_ACCESS: 'foxwatcher:access',
   HERMES_ACCESS: 'hermes:access',
 
-  HERMES_INVENTORY_READ: 'hermes:inventory:read',
-  HERMES_INVENTORY_CREATE: 'hermes:inventory:create',
-  HERMES_INVENTORY_CODE_UPDATE: 'hermes:inventory:code:update',
-
-  HERMES_PRODUCTION_REQUEST_READ: 'hermes:production:request:read',
-  HERMES_PRODUCTION_REQUEST_CREATE: 'hermes:production:request:create',
-
-  HERMES_STOCK_ITEM_ADD: 'hermes:stock:item:add',
-
-  // Krang — Items
+  // Krang - items
   KRANG_ITEMS_READ: 'krang:items:read',
   KRANG_ITEMS_CREATE: 'krang:items:create',
   KRANG_ITEMS_MANAGE: 'krang:items:manage',
@@ -39,26 +34,6 @@ export const PERMISSIONS = {
 
   // Krang — Maintenance
   KRANG_MAINTENANCE_RENENUTET: 'krang:maintenance:renenutet',
-
-  // Admin — Utilisateurs
-  ADMIN_USERS_READ: 'admin:users:read',
-  ADMIN_USERS_MANAGE: 'admin:users:manage',
-
-  // Admin — Rôles applicatifs
-  ADMIN_ROLES_READ: 'admin:roles:read',
-  ADMIN_ROLES_MANAGE: 'admin:roles:manage',
-
-  // Admin — Permissions
-  ADMIN_PERMISSIONS_READ: 'admin:permissions:read',
-  ADMIN_PERMISSIONS_MANAGE: 'admin:permissions:manage',
-
-  // Admin — Mapping Discord
-  ADMIN_DISCORD_MAPPING_READ: 'admin:discord-mapping:read',
-  ADMIN_DISCORD_MAPPING_MANAGE: 'admin:discord-mapping:manage',
-
-  // Admin — Sessions
-  ADMIN_SESSIONS_READ: 'admin:sessions:read',
-  ADMIN_SESSIONS_REVOKE: 'admin:sessions:revoke',
 
   // Wan-Shi-Tong — Utilisateurs
   WAN_USERS_READ: 'wan:users:read',

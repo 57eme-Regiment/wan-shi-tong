@@ -1,23 +1,17 @@
-import { PERMISSIONS } from '@57eme-regiment/auth-contracts';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { injectable } from 'tsyringe';
-import { AdminGuard } from '../adminGuard';
 import { AdminOverrideService } from './adminOverride.service';
 
 /** Contrôleur HTTP pour la gestion des overrides de permissions par utilisateur (admin). */
 @injectable()
 export class AdminOverrideController {
-  constructor(
-    private readonly guard: AdminGuard,
-    private readonly service: AdminOverrideService,
-  ) {}
+  constructor(private readonly service: AdminOverrideService) {}
 
   /** Retourne tous les overrides de permissions associés à un utilisateur. */
   async getByUser(
     request: FastifyRequest<{ Params: { userId: string } }>,
     reply: FastifyReply,
   ) {
-    await this.guard.authorize(request, PERMISSIONS.ADMIN_PERMISSIONS_READ);
     return reply.send(await this.service.getByUser(request.params.userId));
   }
 
@@ -33,15 +27,12 @@ export class AdminOverrideController {
     }>,
     reply: FastifyReply,
   ) {
-    await this.guard.authorize(request, PERMISSIONS.ADMIN_PERMISSIONS_MANAGE);
-    return reply
-      .code(201)
-      .send(
-        await this.service.upsert({
-          userId: request.params.userId,
-          ...request.body,
-        }),
-      );
+    return reply.code(201).send(
+      await this.service.upsert({
+        userId: request.params.userId,
+        ...request.body,
+      }),
+    );
   }
 
   /**
@@ -54,7 +45,6 @@ export class AdminOverrideController {
     }>,
     reply: FastifyReply,
   ) {
-    await this.guard.authorize(request, PERMISSIONS.ADMIN_PERMISSIONS_MANAGE);
     await this.service.delete(
       request.params.userId,
       request.params.permissionKey,
